@@ -1,7 +1,12 @@
-const express = require("express");
-const controller = require("../controllers/homeController.js");
+const { createUser, login, updateUser, deleteUser } = require("../controllers/user.controller");
+const validate = require("../middleware/validdate");
+const registerUserSchema = require("../schema/user.schema");
 
-const homeRouter = express.Router();
+const routeHandler = (app) =>  {
+    app.route("/register").post(validate(registerUserSchema), createUser);
+    app.route("/login").post(login);
+    app.route("/update").post(updateUser);
+    app.route("/delete").post(deleteUser);
+}
 
-homeRouter.get("/", controller.getHome);
-module.exports = homeRouter;
+module.exports = routeHandler;
