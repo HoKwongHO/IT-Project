@@ -2,7 +2,8 @@ const express = require("express")
 const config = require("./config/index.js")
 const app = express();
 const mongoose = require("mongoose");
-const routeHandler = require("./routes/homeRouter");
+const normalRouter = require("./routes/normalRouter");
+//const homeRouter = require("./routes/homeRouter");
 const bodyParser = require("body-parser");
 
 
@@ -18,7 +19,11 @@ const connect = async function() {
 
 app.use(express.static("public"));
 app.use(bodyParser.json());
-routeHandler(app);
+normalRouter(app);
+// homeRouter(app);
+
+
+
 
 //中间件 登陆，验证，跨域，权限
 
@@ -33,3 +38,4 @@ app.listen(config.port,()=> {
 
     console.log(`server is listening ${config.baseUrl}`)
 })
+

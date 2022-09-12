@@ -1,4 +1,5 @@
 const UserModel = require("../models/user.model");
+const DataModel = require("../models/data.model");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -85,9 +86,51 @@ const deleteUser = (req, res) => {
     })
 }
 
+const getAllProducts= async (req,res) => {
+    try{
+        const products = await DataModel.find().lean()
+        console.log(products);
+        res.render('product_demo.hbs',
+            {products:products, layout:"main"})
+    }catch(err){
+        console.log("error with displaying data: ", err)
+    }
+}
+const searching = async(req, res) => {
+    let payload = req.body.payload.trim();
+    let search = await UserModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
+    res.send({payload: search});
+}
+
+const getSearch = (req, res) => {
+    res.sendFile("/views/search-demo.html", {root: __dirname+"/.."});
+};
+
+const getUser = (req, res) => {
+    res.sendFile("/views/index.html", {root: __dirname+"/.."});
+};
+
+//   const productInfo =  async (req, res) => {
+//     const product = await DataModel.findById(req.params._id).lean();
+//     res.render('patient_info',{clinicianName: cli.name, patient: patient, layout:"demo"});
+//   };
+
+// const searchInfo =  async (req,res) => {
+//     try{
+
+//     }catch(err){
+//         console.log("Fail to search: ",err)
+//     }
+// };
+
 module.exports = {
     createUser,
     login,
     updateUser,
-    deleteUser
+    deleteUser,
+    getAllProducts,
+    searching,
+    getSearch,
+    getUser
+    //productInfo
 }

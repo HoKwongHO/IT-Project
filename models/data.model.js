@@ -19,5 +19,5 @@ var DataSchema = mongoose.Schema({
 });
 
 
-const UserModel = mongoose.model("UserModel", UserSchema);
-module.exports = UserModel;
+const DataModel = mongoose.model("DataModel", DataSchema);
+module.exports = DataModel;

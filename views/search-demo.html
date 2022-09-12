@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/searchBar-demo.css">
+  <script src="../controllers/script.js" defer></script>
+  <title>Document</title>
+</head>
+<body>
+  <div class="h1">User Search </div>
+  <input type="text" id="search" onkeyup="sendData(this)"></input>
+  <section id = "searchRes">
+
+  </section>
+  <script>
+    function sendData(e){
+      const searchRes = document.getElementById("searchRes");
+      fetch("getUser", {
+        method: "post", 
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({payload: e.value})
+      }).then(res => res.json()).then(data => {
+        let payload = data.payload;
+        searchRes.innerHTML = '';
+        if(payload.length < 1){
+          searchRes.innerHTML = "<p>No Item Match.</p>"
+          return;
+        }
+        payload.forEach((item, index) => {
+          if(index > 0) searchRes.innerHTML += "<hr>";
+          searchRes.innerHTML += `<p>${item.email}</p>`
+        });
+      });
+    }
+  </script>
+
+</body>
+</html>
