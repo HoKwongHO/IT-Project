@@ -1,6 +1,6 @@
 const { createUser, login, updateUser, deleteUser, getAllProducts, searching, getSearch, getUser } = require("../controllers/user.controller");
 const validate = require("../middleware/validdate");
-const registerUserSchema = require("../schema/user.schema");
+const registerUserSchema = require("../schema/userSchema");
 
 const homeRouter = (app) =>  {
     app.route("/User").get(getUser);

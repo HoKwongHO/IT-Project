@@ -1,5 +1,5 @@
-const UserModel = require("../models/user.model");
-const DataModel = require("../models/data.model");
+const UserModel = require("../models/customerModel");
+const DataModel = require("../models/productModel");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
