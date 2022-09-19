@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const routeHandler = require("./routes/homeRouter");
 const bodyParser = require("body-parser");
-
+const cors = require("cors");
 
 
 const connect = async function() {
@@ -16,6 +16,7 @@ const connect = async function() {
     }
 }
 
+app.use(cors());
 app.use(express.static("public"));
 app.use(bodyParser.json());
 routeHandler(app);
