@@ -26,6 +26,7 @@ function App() {
         
         <Login></Login>
         <Register></Register>
+        
       </header>
     </div>
   );
