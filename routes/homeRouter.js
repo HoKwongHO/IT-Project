@@ -1,4 +1,5 @@
-const { createUser, login, updateUser, deleteUser, getAllProducts, searching, getSearch, getUser } = require("../controllers/user.controller");
+const { createUser, login, updateUser, deleteUser, getAllProducts, getSearch, getAllItems, searching,
+     getUser } = require("../controllers/customerController");
 const validate = require("../middleware/validdate");
 const registerUserSchema = require("../schema/userSchema");
 
@@ -9,8 +10,10 @@ const homeRouter = (app) =>  {
     app.route("/login").post(login);
     app.route("/update").post(updateUser);
     app.route("/delete").post(deleteUser);
-    app.route("/all-product").get(getAllProducts);
-    app.route("/getUser").post(searching);
+    app.route("/allProduct").get(getAllProducts);
+    app.route("/getAllItem").get(getAllItems);
+    app.route("/getSearchedProduct").post(searching);
+    app.route("/getAllItem/:_id").get(getSingleProduct);
     
     // app.route("/patient_info/:_id"),get(productInfo);
 }

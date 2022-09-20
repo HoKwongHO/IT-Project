@@ -1,30 +1,43 @@
+const charactersList = document.getElementById('charactersList');
+const searchBar = document.getElementById('searchBar');
+let hpCharacters = [];
 
-const userCardTemplate = document.querySelector("[data-user-template]")
-const userCardContainer = document.querySelector("[data-user-cards-container]")
-const searchInput = document.querySelector("[data-search]")
+searchBar.addEventListener('keyup', (e) => {
+    const searchString = e.target.value.toLowerCase();
 
-let users = []
+    const filteredCharacters = hpCharacters.filter((character) => {
+        return (
+            character.name.toLowerCase().includes(searchString) ||
+            character.house.toLowerCase().includes(searchString)
+        );
+    });
+    displayCharacters(filteredCharacters);
+});
 
-searchInput.addEventListener("input", e => {
-  const value = e.target.value.toLowerCase()
-  users.forEach(user => {
-    const isVisible =
-      user.name.toLowerCase().includes(value) ||
-      user.email.toLowerCase().includes(value)
-    user.element.classList.toggle("hide", !isVisible)
-  })
-})
+const loadCharacters = async () => {
+    try {
+        const res = await fetch('https://hp-api.herokuapp.com/api/characters');
+        hpCharacters = await res.json();
+        displayCharacters(hpCharacters);
+    } catch (err) {
+        console.error(err);
+    }
+};
 
-fetch("https://jsonplaceholder.typicode.com/users")
-  .then(res => res.json())
-  .then(data => {
-    users = data.map(user => {
-      const card = userCardTemplate.content.cloneNode(true).children[0]
-      const header = card.querySelector("[data-header]")
-      const body = card.querySelector("[data-body]")
-      header.textContent = user.name
-      body.textContent = user.email
-      userCardContainer.append(card)
-      return { name: user.name, email: user.email, element: card }
-    })
-  })
+const displayCharacters = (characters) => {
+    const htmlString = characters
+        .map((character) => {
+            return `
+            <li class="character">
+                <h2>${character.name}</h2>
+                <p>House: ${character.house}</p>
+                <img src="${character.image}"></img>
+            </li>
+        `;
+        })
+        .join('');
+    charactersList.innerHTML = htmlString;
+};
+
+loadCharacters();
+

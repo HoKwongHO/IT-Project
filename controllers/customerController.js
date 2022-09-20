@@ -87,15 +87,10 @@ const deleteUser = (req, res) => {
 }
 
 const getAllProducts= async (req,res) => {
-    try{
-        const products = await DataModel.find().lean()
-        console.log(products);
-        res.render('product_demo.hbs',
-            {products:products, layout:"main"})
-    }catch(err){
-        console.log("error with displaying data: ", err)
-    }
+    res.sendFile("/views/product_demo.html", {root: __dirname+"/.."});
 }
+
+
 const searching = async(req, res) => {
     let payload = req.body.payload.trim();
     let search = await UserModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
@@ -123,6 +118,11 @@ const getUser = (req, res) => {
 //     }
 // };
 
+const getAllItems = async(req, res) => {
+    let items = await UserModel.find({}).exec();
+    res.send({items: items});
+}
+
 module.exports = {
     createUser,
     login,
@@ -131,6 +131,7 @@ module.exports = {
     getAllProducts,
     searching,
     getSearch,
-    getUser
+    getUser,
+    getAllItems
     //productInfo
 }

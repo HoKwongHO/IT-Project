@@ -3,7 +3,7 @@ const config = require("./config/index.js")
 const app = express();
 const mongoose = require("mongoose");
 const normalRouter = require("./routes/normalRouter");
-//const homeRouter = require("./routes/homeRouter");
+const homeRouter = require("./routes/homeRouter");
 const bodyParser = require("body-parser");
 
 
@@ -20,7 +20,7 @@ const connect = async function() {
 app.use(express.static("public"));
 app.use(bodyParser.json());
 normalRouter(app);
-// homeRouter(app);
+homeRouter(app);
 
 
 
