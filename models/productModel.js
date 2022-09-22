@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const productSchema = mongoose.Schema({
   productName: {
     type: String,
@@ -25,6 +26,8 @@ const productSchema = mongoose.Schema({
   createdAt: { type: Date, immutable: true, default: () => Date.now() },
   updateAt: { type: Date, default: () => Date.now() },
 =======
+=======
+>>>>>>> parent of 5c64864 (staff schema and controller, product controller)
 var DataSchema = mongoose.Schema({
     productName: {
         type: String,
@@ -41,6 +44,9 @@ var DataSchema = mongoose.Schema({
     productDescription: {
         type: String,
     },
+<<<<<<< HEAD
+>>>>>>> parent of 5c64864 (staff schema and controller, product controller)
+=======
 >>>>>>> parent of 5c64864 (staff schema and controller, product controller)
 });
 
