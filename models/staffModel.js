@@ -6,6 +6,7 @@ const staffSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, lowercase: true },
   password: { type: String, minLength: 6, maxLength: 20, required: true },
+  staffID: { type: Number, requried: true, unique: true },
   createdAt: { type: Date, immutable: true, default: () => Date.now() },
   updateAt: { type: Date, default: () => Date.now() },
   // colleage: {

@@ -1,31 +1,26 @@
 const mongoose = require("mongoose");
 
 const productSchema = mongoose.Schema({
-  name: {
+  productName: {
     type: String,
     required: true,
   },
-  price: {
-    type: Number,
+  productPrice: {
+    type: String,
     required: true,
   },
-  picture: {
+  productPicture: {
     data: Buffer,
     contentType: String,
     required: true,
   },
-  storage: {
-    type: Number,
-    required: true,
-  },
-  catogory: {
+  productCatogory: {
     type: String,
     required: true,
   },
-  description: {
+  productDescription: {
     type: String,
   },
-
   createdAt: { type: Date, immutable: true, default: () => Date.now() },
   updateAt: { type: Date, default: () => Date.now() },
 });
