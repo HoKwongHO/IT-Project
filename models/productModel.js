@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+<<<<<<< HEAD
 const productSchema = mongoose.Schema({
   productName: {
     type: String,
@@ -23,12 +24,26 @@ const productSchema = mongoose.Schema({
   },
   createdAt: { type: Date, immutable: true, default: () => Date.now() },
   updateAt: { type: Date, default: () => Date.now() },
+=======
+var DataSchema = mongoose.Schema({
+    productName: {
+        type: String,
+        required: true,
+    },
+    productPrice: {
+        type: String,
+        required: true,
+    },
+    productPicture: {
+        type: Buffer,
+        required: true,
+    },
+    productDescription: {
+        type: String,
+    },
+>>>>>>> parent of 5c64864 (staff schema and controller, product controller)
 });
 
-productSchema.pre("save", function (next) {
-  this.updateAt = Date.now();
-  //throw new errot("fail save")
-  next();
-});
 
-module.exports = mongoose.model("productModel", productSchema);
+const DataModel = mongoose.model("DataModel", DataSchema);
+module.exports = DataModel;
