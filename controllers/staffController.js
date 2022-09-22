@@ -9,12 +9,13 @@ mongoose.connect(
   "mongodb+srv://honoers:honoers@cluster0.0sms5sf.mongodb.net/?retryWrites=true&w=majority"
 );
 
-async function createStaff(n, e, p) {
+async function createStaff(n, e, p, id) {
   try {
     const staff = await staffModel.create({
       name: n,
       email: e,
       password: p,
+      staffID: id,
     });
     //   await staff.save();
     console.log(staff);
@@ -23,7 +24,7 @@ async function createStaff(n, e, p) {
   }
 }
 
-// createStaff("Ryan", "ryan@gmail.com", 123456);
+// createStaff("Ryan", "ryan@gmail.com", 123456, 1);
 
 //id is number
 async function search(staffID) {
@@ -39,6 +40,21 @@ async function search(staffID) {
 async function deleteStaff(staffID) {
   try {
     await staffModel.deleteOne(staffID);
+  } catch (e) {
+    console.log(e.message);
+  }
+}
+
+async function createProduct(n, e, p, id) {
+  try {
+    const staff = await staffModel.create({
+      name: n,
+      email: e,
+      password: p,
+      staffID: id,
+    });
+    //   await staff.save();
+    console.log(staff);
   } catch (e) {
     console.log(e.message);
   }
