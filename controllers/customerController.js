@@ -68,7 +68,7 @@ const updateUser  = async (req, res) => {
 }
 
 const encrypt = async (password) => {
-    const salt = await bcrypt.genSalt(saltRounds); //使用bcrypt 模块进行数据加密
+    const salt = await bcrypt.genSalt(saltRounds); //use bcrypt to encryption
     const hash = bcrypt.hashSync(password, salt); //hash
     return hash;
 }
@@ -86,21 +86,24 @@ const deleteUser = (req, res) => {
     })
 }
 
+// get the page that lists all the products
 const getAllProducts= async (req,res) => {
     res.sendFile("/views/product_demo.html", {root: __dirname+"/.."});
 }
 
-
+// use the key words passed in to search the items that match the items
 const searching = async(req, res) => {
     let payload = req.body.payload.trim();
     let search = await UserModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
     res.send({payload: search});
 }
 
+// get the search page
 const getSearch = (req, res) => {
     res.sendFile("/views/search-demo.html", {root: __dirname+"/.."});
 };
 
+// get the login logout page
 const getUser = (req, res) => {
     res.sendFile("/views/index.html", {root: __dirname+"/.."});
 };

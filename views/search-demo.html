@@ -16,19 +16,21 @@
 
   </section>
   <script>
+    // send the searching key word every time a letter is inputed 
     function sendData(e){
       const searchRes = document.getElementById("searchRes");
-      fetch("getSearchedProduct", {
+      fetch("getSearchedProduct", {  // use post method to ssearch items in the database
         method: "post", 
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({payload: e.value})
-      }).then(res => res.json()).then(data => {
+      }).then(res => res.json()).then(data => {  // check if any item matches the search key word
         let payload = data.payload;
         searchRes.innerHTML = '';
         if(payload.length < 1){
           searchRes.innerHTML = "<p>No Item Match.</p>"
           return;
         }
+        // show all items that matches the key word
         payload.forEach((item, index) => {
           if(index > 0) searchRes.innerHTML += "<hr>";
           searchRes.innerHTML += `<a href="/getAllItem/${item._id}"> ${item.email}</a> <br>`
@@ -40,28 +42,3 @@
 </body>
 </html>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Document</title>
-        <link rel="stylesheet" href="../public/css/searchBar-demo.css" />
-    </head>
-    <body>
-        <div class="container">
-            <h1>&#x2728;Harry Potter Characters &#x2728;</h1>
-            <div id="searchWrapper">
-                <input
-                    type="text"
-                    name="searchBar"
-                    id="searchBar"
-                    placeholder="search for a character"
-                />
-            </div>
-            <ul id="charactersList"></ul>
-        </div>
-        <script src="../controllers/script.js"></script>
-    </body>
-</html> -->

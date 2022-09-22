@@ -4,8 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="../public/css/allProduct-demo.css"> -->
-    <!-- <script src="../controllers/allProduct.js" defer></script> -->
     <title>Document</title>
     </head>
     <body>
@@ -19,10 +17,11 @@
             const itemList = document.getElementById("itemList");
             fetch("http://localhost:3030/getAllItem")
             .then(res => res.json()).then(data => {
+                // using a for loop to show all items and make them clickable
                 let items = data.items;
                 itemList.innerHTML = '';
                 items.forEach((item) => {
-                    itemList.innerHTML += `<a href="/getAllItem/${item._id}"> ${item.email}</a> <br>`//`<p>${item.email}</p>`
+                    itemList.innerHTML += `<a href="/getAllItem/${item._id}"> ${item.email}</a> <br>`
                 });
             });
         })

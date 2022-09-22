@@ -13,9 +13,9 @@ const homeRouter = (app) =>  {
     app.route("/allProduct").get(getAllProducts);
     app.route("/getAllItem").get(getAllItems);
     app.route("/getSearchedProduct").post(searching);
-    app.route("/getAllItem/:_id").get(getSingleProduct);
+    // app.route("/getAllItem/:_id").get(getSingleProduct); haven't done writting yet
     
-    // app.route("/patient_info/:_id"),get(productInfo);
+    
 }
 
 module.exports = homeRouter;
