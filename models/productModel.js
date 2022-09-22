@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const productSchema = mongoose.Schema({
   productName: {
     type: String,
@@ -28,6 +29,7 @@ const productSchema = mongoose.Schema({
 =======
 =======
 >>>>>>> parent of 5c64864 (staff schema and controller, product controller)
+
 var DataSchema = mongoose.Schema({
     productName: {
         type: String,
@@ -45,10 +47,8 @@ var DataSchema = mongoose.Schema({
         type: String,
     },
 <<<<<<< HEAD
->>>>>>> parent of 5c64864 (staff schema and controller, product controller)
-=======
->>>>>>> parent of 5c64864 (staff schema and controller, product controller)
-});
+<<<<<<< HEAD
+>>>>>>> parent of 5c64864 (staff schema and controller, product c
 
 
 const DataModel = mongoose.model("DataModel", DataSchema);
