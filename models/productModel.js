@@ -1,25 +1,39 @@
 const mongoose = require("mongoose");
 
+const productSchema = mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: String,
+    required: true,
+  },
+  picture: {
+    data: Buffer,
+    contentType: String,
+    required: true,
+  },
+  storage: {
+    type: Number,
+    required: true,
+  },
+  catogory: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+  },
 
+  createdAt: { type: Date, immutable: true, default: () => Date.now() },
+  updateAt: { type: Date, default: () => Date.now() },
+});
 
-var DataSchema = mongoose.Schema({
-    productName: {
-        type: String,
-        required: true,
-    },
-    productPrice: {
-        type: String,
-        required: true,
-    },
-    productPicture: {
-        type: Buffer,
-        required: true,
-    },
-    productDescription: {
-        type: String,
-    },
+productSchema.pre("save", function (next) {
+  this.updateAt = Date.now();
+  //throw new errot("fail save")
+  next();
+});
 
-
-
-const DataModel = mongoose.model("DataModel", DataSchema);
-module.exports = DataModel;
+module.exports = mongoose.model("productModel", productSchema);
