@@ -6,21 +6,20 @@ const productSchema = mongoose.Schema({
     required: true,
   },
   price: {
-    type: String,
-    required: true,
+    type: Number,
   },
   picture: {
     data: Buffer,
     contentType: String,
-    required: true,
+  },
+  picdir: {
+    type: String,
   },
   storage: {
     type: Number,
-    required: true,
   },
   catogory: {
     type: String,
-    required: true,
   },
   description: {
     type: String,
