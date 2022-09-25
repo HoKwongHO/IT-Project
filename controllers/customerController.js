@@ -30,19 +30,21 @@ const login = (req, res) =>{
 };
 
 const createUser = (req, res)=> {
-    const {email, password } = req.body;
+    const {nickname, email, password } = req.body;
     UserModel.findOne({email}, (err, result)=> {
         if (err) {
             res.status(500).json({msg:"Server error!"});
+            
         }
         else {
             if (result) {
                 res.status(200).json({msg: "User already existed!"});
             }
             else {
-                new UserModel({email, password}).save((err, user)=>{
+                new UserModel({nickname, email, password}).save((err, user)=>{
                     if (err) {
                         res.status(500).json({msg:"Server error!"});
+
                     }
                     else {
                         res.status(200).json({msg:"Registered!",user});

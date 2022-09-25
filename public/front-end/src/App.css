@@ -1,10 +1,23 @@
 .App {
-  text-align: center;
+  padding: 90px 75px 35px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+.hotTitle {
+  text-align: center;
+  font-weight: bold;
+  font-size: 70px;
+  color: rgb(85, 82, 82);
 }
 
 @media (prefers-reduced-motion: no-preference) {

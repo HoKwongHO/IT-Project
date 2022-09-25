@@ -1,29 +1,41 @@
 import React, { useState } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Button, Checkbox, FormControlLabel, TextField } from '@material-ui/core';
 import './login.css'
 import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import FormControl from '@material-ui/core/FormControl';
-import Grid from '@material-ui/core/Grid';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import Header from '../Components/Header';
+import SignIn from './signin';
+
 
 const useStyles = makeStyles((theme) => ({
-  margin: {
-    margin: theme.spacing(1),
+  root: {
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
   },
 }));
 
 
+
 function Login() {
   const classes = useStyles();
+  const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogin,setLogin] = useState(true);
   const loginbtn = async () => {
     const res = await fetch("http://localhost:3030/login", { method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({ email, password }) });
     const data = await res.json();
     console.log(data);
+  };
+  const registerbtn = async() => {
+    const res = await fetch("http://localhost:3030/register" ,{method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({nickname, email, password})});
+    const data = await res.json();
+    console.log(data);
+  };
+
+  const handleNickname = (e) => {
+    setNickname(e.target.value);
   };
 
   const handleEmail = (e) => {
@@ -33,46 +45,48 @@ function Login() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
-  return (
-    <div className='wrapper'>
-      <div className='loginWrapper'>
-      <div>
-      <FormControl className={classes.margin}>
-        <InputLabel htmlFor="input-with-icon-adornment">With a start adornment</InputLabel>
-        <Input
 
-          id="input-with-icon-adornment"
-          startAdornment={
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          }
-        />
-      </FormControl>
+  return (
+    
+    <div className='wrapper'>
+      <Header></Header>
+      <form className={classes.form} noValidate>
+       <div className = 'loginWrapper'>
       <TextField
-        className={classes.margin}
-        id="input-with-icon-textfield"
-        label="TextField"
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          ),
-        }}
-      />
-      <div className={classes.margin}>
-        <Grid container spacing={1} alignItems="flex-end">
-          <Grid item>
-            <AccountCircle />
-          </Grid>
-          <Grid item>
-            <TextField id="input-with-icon-grid" label="With a grid" />
-          </Grid>
-        </Grid>
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            // autoComplete="email"
+            autoFocus
+            onChange={handleEmail}
+          />
+        <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            // autoComplete="current-password"
+            onChange={handlePassword}
+          />
+        <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          />
+        <Button variant="contained" color="primary" onClick={loginbtn}>
+          Login
+        </Button>
+        {/* <SignIn></SignIn> */}
+        <p onClick={() => {setLogin(false);}}>Do not have an account? Click here</p>
       </div>
-    </div>
-      </div>
+      </form>
     </div>
 
   );
@@ -82,3 +96,4 @@ function Login() {
 
 
 export default Login;
+

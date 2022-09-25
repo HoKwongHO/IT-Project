@@ -2,6 +2,8 @@ const {string, number, object} = require("zod");
 
 const registerUserSchema = object({ //规定注册接口的参数格式
     body: object({
+        nickname: string({
+        }),
         email: string({
             required_error: "",
             invalid_type_error: "号码格式错误"

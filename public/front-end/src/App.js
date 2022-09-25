@@ -1,34 +1,57 @@
 import logo from './logo.svg';
 import './App.css';
 import Login from './Login/login';
-import React from 'react';
+import React,{ useState } from 'react';
 import Register from './Register/register';
 import Header from './Components/Header';
-
+import CardList from './Components/CarList/CardList';
+import Information from './Components/Information';
+// import ThemeContext from './ThemeContext/ThemContext'
+import Footer from './Components/Footer';
+import { useThemeContext } from './ThemeContext/ThemContext';
+import Sitemap from './sitemap';
 
 function App() {
+  const { theme } = useThemeContext();
+  const [list,setList] = useState([
+    {
+      title: 'test',
+      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    },
+    {
+      title: 'test',
+      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    },
+    {
+      title: 'test',
+      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    },
+    {
+      title: 'test',
+      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    }
+  ]);
+
+  const [info,setInfo] = useState({
+    title: "Detail Title",
+    detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information. Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information. Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information. Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+  })
   return (
-    <div className="App">
-      <Header></Header>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        
-        <Login></Login>
-        <Register></Register>
-        
-      </header>
-    </div>
+    <>
+      <div className="App" style={{background: theme == 'light' ? 'white': 'black'}}>
+        <Header></Header>
+        <CardList cardList={list}/>
+        <h3 className="hotTitle">In-Store Hot Product.</h3>
+        <CardList cardList={list}/>
+        <Information info={info}/>
+        <Sitemap></Sitemap>
+      </div>
+      <Footer/>
+    </>
   );
 }
 
