@@ -126,6 +126,12 @@ const getAllItems = async(req, res) => {
     res.send({items: items});
 }
 
+const getSingleProduct = async(req, res) => {
+    let item = await UserModel.findById(req.params._id).exec();
+    res.send({item: item});
+}
+
+
 module.exports = {
     createUser,
     login,
@@ -135,6 +141,7 @@ module.exports = {
     searching,
     getSearch,
     getUser,
-    getAllItems
+    getAllItems,
+    getSingleProduct
     //productInfo
 }

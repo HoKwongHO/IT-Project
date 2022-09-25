@@ -33,7 +33,7 @@
         // show all items that matches the key word
         payload.forEach((item, index) => {
           if(index > 0) searchRes.innerHTML += "<hr>";
-          searchRes.innerHTML += `<a href="/getAllItem/${item._id}"> ${item.email}</a> <br>`
+          searchRes.innerHTML += `<a href="/getSingleItem/${item._id}"> ${item.email}</a> <br>`
         });
       });
     }

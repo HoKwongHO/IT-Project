@@ -8,7 +8,6 @@
     </head>
     <body>
         <h1>All Products</h1>
-        <a href="/getAllItem"> getAllItem</a>
         <section id = "itemList">
         </section>
     </body>
@@ -21,7 +20,7 @@
                 let items = data.items;
                 itemList.innerHTML = '';
                 items.forEach((item) => {
-                    itemList.innerHTML += `<a href="/getAllItem/${item._id}"> ${item.email}</a> <br>`
+                    itemList.innerHTML += `<a href="/getSingleItem/${item._id}"> ${item.email}</a> <br>`
                 });
             });
         })

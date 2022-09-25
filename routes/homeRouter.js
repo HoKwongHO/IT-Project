@@ -1,5 +1,5 @@
 const { createUser, login, updateUser, deleteUser, getAllProducts, getSearch, getAllItems, searching,
-     getUser } = require("../controllers/customerController");
+     getUser, getSingleProduct} = require("../controllers/customerController");
 const validate = require("../middleware/validdate");
 const registerUserSchema = require("../schema/userSchema");
 
@@ -13,7 +13,7 @@ const homeRouter = (app) =>  {
     app.route("/allProduct").get(getAllProducts);
     app.route("/getAllItem").get(getAllItems);
     app.route("/getSearchedProduct").post(searching);
-    // app.route("/getAllItem/:_id").get(getSingleProduct); haven't done writting yet
+    app.route("/getSingleItem/:_id").get(getSingleProduct); 
     
     
 }
