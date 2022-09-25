@@ -3,7 +3,7 @@ const {string, number, object} = require("zod");
 const registerUserSchema = object({ //规定注册接口的参数格式
     body: object({
         email: string({
-            required_error: "缺少电话号码",
+            required_error: "",
             invalid_type_error: "号码格式错误"
         }).email({ message: "Invalid email address" }),
         password: string({

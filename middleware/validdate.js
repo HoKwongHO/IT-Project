@@ -9,7 +9,7 @@ const validate = ( schema ) => ( req,res,next) => {
         next()
     } catch(e) {
         res.status(201).json({
-            status: 40,
+            status: 400,
             data: {
                 msg: e.issues[0].message || "信息格式错误", 
             }

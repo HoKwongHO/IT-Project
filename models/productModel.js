@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+
 var DataSchema = mongoose.Schema({
     productName: {
         type: String,
@@ -16,7 +18,7 @@ var DataSchema = mongoose.Schema({
     productDescription: {
         type: String,
     },
-});
+
 
 
 const DataModel = mongoose.model("DataModel", DataSchema);
