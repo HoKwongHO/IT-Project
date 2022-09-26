@@ -94,3 +94,10 @@ const deleteProduct = (req, res) => {
     }
   );
 };
+
+module.exports = {
+  getProduct,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};
