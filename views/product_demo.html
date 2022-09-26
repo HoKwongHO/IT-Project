@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    </head>
+    <body>
+        <h1>All Products</h1>
+        <section id = "itemList">
+        </section>
+    </body>
+    <script>
+        window.addEventListener("load", ()=>{
+            const itemList = document.getElementById("itemList");
+            fetch("http://localhost:3030/getAllItem")
+            .then(res => res.json()).then(data => {
+                // using a for loop to show all items and make them clickable
+                let items = data.items;
+                itemList.innerHTML = '';
+                items.forEach((item) => {
+                    itemList.innerHTML += `<a href="/getSingleItem/${item._id}"> ${item.email}</a> <br>`
+                });
+            });
+        })
+        
+    </script>
+</html>
