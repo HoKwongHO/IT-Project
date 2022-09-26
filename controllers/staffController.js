@@ -2,8 +2,8 @@
 //npm start
 
 const mongoose = require("mongoose");
-const staffModel = require("./staffModel");
-const productModel = require("./productModel");
+const staffModel = require("../models/staffModel");
+const productModel = require("../models/productModel");
 
 mongoose.connect(
   "mongodb+srv://honoers:honoers@cluster0.0sms5sf.mongodb.net/?retryWrites=true&w=majority"
