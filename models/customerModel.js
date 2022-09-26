@@ -34,7 +34,7 @@ customerSchema.pre("save", async function (next) { // Hash the password before s
     return next()
   }) 
 
-  UserSchema.methods.validatePassword = function (password, callback) { //在model上挂载密码验证函数
+  customerSchema.methods.validatePassword = function (password, callback) { //在model上挂载密码验证函数
     const customer = this;
     //hash
     bcrypt.compare(password, customer.password, (err, isMatch) => { //通过bcrypt的compare函数进行解密处理
@@ -44,5 +44,5 @@ customerSchema.pre("save", async function (next) { // Hash the password before s
   };
  
 
-const CustomerModel = mongoose.model("CustomerModel", CustomerSchema);
+const CustomerModel = mongoose.model("CustomerModel", customerSchema);
 module.exports = CustomerModel;

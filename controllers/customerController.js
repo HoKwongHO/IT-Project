@@ -108,19 +108,6 @@ const getUser = (req, res) => {
     res.sendFile("/views/index.html", {root: __dirname+"/.."});
 };
 
-//   const productInfo =  async (req, res) => {
-//     const product = await DataModel.findById(req.params._id).lean();
-//     res.render('patient_info',{clinicianName: cli.name, patient: patient, layout:"demo"});
-//   };
-
-// const searchInfo =  async (req,res) => {
-//     try{
-
-//     }catch(err){
-//         console.log("Fail to search: ",err)
-//     }
-// };
-
 const getAllItems = async(req, res) => {
     let items = await UserModel.find({}).exec();
     res.send({items: items});

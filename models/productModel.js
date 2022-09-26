@@ -19,7 +19,7 @@ var DataSchema = mongoose.Schema({
         type: String,
     },
 
-
+});
 
 const DataModel = mongoose.model("DataModel", DataSchema);
 module.exports = DataModel;
