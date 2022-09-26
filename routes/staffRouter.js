@@ -5,9 +5,9 @@ const {
   deleteProduct,
 } = require("../controllers/productController");
 const { login, getStaff } = require("../controllers/staffController");
-const productRouter = (app) => {
+const staffRouter = (app) => {
   app.route("/staffLogin").post(login);
-  app.route("/profile").get(getStaff);
+  app.route("/staffProfile").get(getStaff);
   app.route("/addProduct").post(createProduct);
   app.route("/updateProduct").post(updateProduct);
   app.route("/deleteProduct").post(deleteProduct);
@@ -15,4 +15,4 @@ const productRouter = (app) => {
   // app.route("/patient_info/:_id"),get(productInfo);
 };
 
-module.exports = productRouter;
+module.exports = staffRouter;

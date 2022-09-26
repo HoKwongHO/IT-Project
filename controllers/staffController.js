@@ -9,7 +9,7 @@ mongoose.connect(
   "mongodb+srv://honoers:honoers@cluster0.0sms5sf.mongodb.net/?retryWrites=true&w=majority"
 );
 
-const login = (req, res) => {
+const staffLogin = (req, res) => {
   const { email, password } = req.body;
   staffModel.findOne({ email }, (err, staff) => {
     if (err) {
@@ -71,3 +71,19 @@ async function deleteStaff(staffID) {
     console.log(e.message);
   }
 }
+
+const getStaff = (req, res) => {
+  const input = req.body;
+  staffModel.findOne({ name: input.name }, (err, result) => {
+    if (err) {
+      res.status(500).json({ msg: "Server error!" });
+    } else {
+      //render result product information
+    }
+  });
+};
+
+module.exports = {
+  staffLogin,
+  getStaff,
+};
