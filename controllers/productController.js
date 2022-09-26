@@ -23,24 +23,44 @@ const createProduct = (req, res) => {
           if (err) {
             res.status(500).json({ msg: "Server error!" });
           } else {
-            const newProduct = new productModel({
-              name: input.name,
-              price: input.price,
-              storage: input.storage,
-              category: input.category,
-              description: input.description,
-              createAt: input.createdAt,
-              updateAt: input.updateAt,
-              picture: {
-                data: req.file.filename,
-                contentType: "image/png",
-              },
-              picdir: "./public/uploads/" + req.file.originalname,
-            });
-            newProduct
-              .save()
-              .then(() => res.status(200).json({ msg: "Product registered!" }))
-              .catch((err) => res.status(500).json({ msg: "Server error!" }));
+            if (req.file) {
+              const newProduct = new productModel({
+                name: input.name,
+                price: input.price,
+                storage: input.storage,
+                category: input.category,
+                description: input.description,
+                createAt: input.createdAt,
+                updateAt: input.updateAt,
+                picture: {
+                  data: req.file.filename,
+                  contentType: "image/png",
+                },
+                picdir: "./public/uploads/" + req.file.originalname,
+              });
+              newProduct
+                .save()
+                .then(() =>
+                  res.status(200).json({ msg: "Product registered!" })
+                )
+                .catch((err) => res.status(500).json({ msg: err }));
+            } else {
+              const newProduct = new productModel({
+                name: input.name,
+                price: input.price,
+                storage: input.storage,
+                category: input.category,
+                description: input.description,
+                createAt: input.createdAt,
+                updateAt: input.updateAt,
+              });
+              newProduct
+                .save()
+                .then(() =>
+                  res.status(200).json({ msg: "Product registered!" })
+                )
+                .catch((err) => res.status(500).json({ msg: err }));
+            }
           }
         });
       }
@@ -51,31 +71,52 @@ const createProduct = (req, res) => {
 //Modify
 const updateProduct = async (req, res) => {
   const input = req.body;
-  productModel.findOneAndUpdate(
-    { name: input.name },
-    { price: input.price },
-    {
-      picture: {
-        data: req.file.filename,
-        contentType: "image/png",
+  if (req.file) {
+    productModel.findOneAndUpdate(
+      { name: input.name },
+      {
+        price: input.price,
+        picture: {
+          data: req.file.filename,
+          contentType: "image/png",
+        },
+        picdir: "./public/uploads/" + req.file.originalname,
+        storage: input.storage,
+        category: input.category,
+        description: input.description,
       },
-    },
-    { picdir: "./public/uploads/" + req.file.originalname },
-    { storage: input.storage },
-    { category: input.category },
-    { description: input.description },
-
-    (err, result) => {
-      if (err) {
-        res.status(500).json({ msg: "Server error!" });
-      } else {
-        res.status(200).json({
-          msg: `Successfully modified the product:${input.name},`,
-          result,
-        });
+      (err, result) => {
+        if (err) {
+          res.status(500).json({ msg: "Server error!" });
+        } else {
+          res.status(200).json({
+            msg: `Successfully modified the product:${input.name},`,
+            result,
+          });
+        }
       }
-    }
-  );
+    );
+  } else {
+    productModel.findOneAndUpdate(
+      { name: input.name },
+      {
+        price: input.price,
+        storage: input.storage,
+        category: input.category,
+        description: input.description,
+      },
+      (err, result) => {
+        if (err) {
+          res.status(500).json({ msg: "Server error!" });
+        } else {
+          res.status(200).json({
+            msg: `Successfully modified the product:${input.name},`,
+            result,
+          });
+        }
+      }
+    );
+  }
 };
 
 //Delet product
