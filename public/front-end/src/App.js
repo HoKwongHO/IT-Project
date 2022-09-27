@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import Login from './Login/login';
-import React,{ useState } from 'react';
+import React,{ useState,useEffect } from 'react';
 import Register from './Register/register';
 import Header from './Components/Header';
 import CardList from './Components/CarList/CardList';
@@ -10,6 +10,7 @@ import Information from './Components/Information';
 import Footer from './Components/Footer';
 import { useThemeContext } from './ThemeContext/ThemContext';
 import Sitemap from './sitemap';
+import axios from 'axios';
 
 function App() {
   const { theme } = useThemeContext();
@@ -35,6 +36,20 @@ function App() {
       detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
     }
   ]);
+
+  const initData = () => {
+    axios({
+      url: "http://localhost:3030/initProduct"
+    }).then(res => {
+      if(res.status == 200) {
+        setList([].splice.call(res.data,0,4))
+      }
+    })
+  }
+
+  useEffect(() => {
+    initData();
+  },[])
 
   const [info,setInfo] = useState({
     title: "Detail Title",

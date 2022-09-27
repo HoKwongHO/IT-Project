@@ -5,11 +5,11 @@ const Card = ({ info }) => {
   return (
     <div className='cardWrapper'>
         <div className="imgWrapper">
-            <img src={info.img} alt="no data" />
+            <img src={info.picture} alt="no data" />
         </div>
         <div className="info">
-            <p className="infoTitle">{info.title}</p>
-            <p className="infoDetail">{info.detail}</p>
+            <p className="infoTitle">{info.name}</p>
+            <p className="infoDetail">{info.price}</p>
             <p className="more">view more</p>
         </div>
     </div>

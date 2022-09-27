@@ -3,7 +3,14 @@ const validate = require("../middleware/validdate");
 const registerUserSchema = require("../schema/userSchema");
 const multer  = require('multer-upgrade');
 const { $where } = require("../models/customerModel");
-const config = require("../config")
+const config = require("../config");
+const {
+    createProduct,
+    updateProduct,
+    deleteProduct,
+} = require("../controllers/productController");
+const {  staffLogin,
+    getStaff,} = require("../controllers/staffController");
 const homeRouter = (app) =>  {
     app.route("/User").get(getUser);
     app.route("/search").get(getSearch);
@@ -21,7 +28,12 @@ const homeRouter = (app) =>  {
               'Content-Type': 'image/png',
           }
         })
-      })
+      });
+    app.route("/staffLogin").post(staffLogin);
+    app.route("/profile").get(getStaff);
+    app.route("/addProduct").post(createProduct);
+    app.route("/updateProduct").post(updateProduct);
+    app.route("/deleteProduct").post(deleteProduct);
     // app.route("/patient_info/:_id"),get(productInfo);
 }
 

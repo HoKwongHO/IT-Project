@@ -12,10 +12,11 @@
 
 .listWrapper  ul li {
     cursor: pointer;
-    color: white;
+    color: black;
     font-weight: bold;
     padding: 0 15px;
 }
+
 
 .cardItem {
     position: absolute;
@@ -26,4 +27,9 @@
     background-color: aliceblue;
     padding: 30px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.cardItem ul li {
+    display: flex;
+    
 }

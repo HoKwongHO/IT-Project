@@ -1,48 +1,45 @@
-const mongoose = require("mongoose");
-const bcrypt = require('bcrypt');
+const mongoose = require("mongoose"); // Connect Mongodb
+const bcrypt = require("bcrypt");
 const saltRounds = 10;
-
-var customerSchema = mongoose.Schema({
-    nickname: {
-        type: String,
-        unique: false,
-        default: `User_${Date.now()}`,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-    },
-    password: {
-        type: String,
-        required: true,
-
-    },
-  },
-  {
-      timestamps: { createdAt: "createTime", updatedAt: "updateTime" },
+// Set up staff model, encrypt password before storing in database.
+const staffSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, lowercase: true },
+  password: { type: String, minLength: 6, maxLength: 20, required: true },
+  createdAt: { type: Date, immutable: true, default: () => Date.now() },
+  updateAt: { type: Date, default: () => Date.now() },
+  // colleage: {
+  //   type: mongoose.SchemaTypes.ObjectId,
+  //   ref: "Staff",
+  // },
 });
 
-customerSchema.pre("save", async function (next) { // Hash the password before saving to database
-    const customer = this; // {username,password}
-    if (!customer.isModified("password")) {
-      return next()
-    }
-    const salt = await bcrypt.genSalt(saltRounds); // use bcrypt to encrypt the data
-    const hash = bcrypt.hashSync(customer.password, salt); // hash the password
-    customer.password = hash; // save the hash to the password 
-    return next()
-  }) 
+// Hash password before saving it.
+staffSchema.pre("save", async function (next) {
+  if (!this.isModified("password")) return next();
+  try {
+    const salt = await bcrypt.genSalt(saltRounds);
+    this.password = await bcrypt.hash(this.password, salt);
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
 
-  customerSchema.methods.validatePassword = function (password, callback) { //在model上挂载密码验证函数
-    const customer = this;
-    //hash
-    bcrypt.compare(password, customer.password, (err, isMatch) => { //通过bcrypt的compare函数进行解密处理
-      if (err) return callback(err);
-      callback(null, isMatch);
-    });
-  };
- 
+// Verify password when login
+staffSchema.methods.verifyPassword = function (password, callback) {
+  bcrypt.compare(password, this.password, (err, valid) => {
+    callback(err, valid);
+  });
+};
 
-const CustomerModel = mongoose.model("CustomerModel", customerSchema);
-module.exports = CustomerModel;
+//update updateAt before save
+staffSchema.pre("save", function (next) {
+  this.updateAt = Date.now();
+  //throw new errot("fail save")
+  next();
+});
+
+
+const staffModel = mongoose.model("staffModel", staffSchema);
+module.exports = staffModel;
