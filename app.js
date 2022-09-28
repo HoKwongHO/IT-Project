@@ -19,11 +19,11 @@ const connect = async function() {
 }
 
 app.use(cors());
-app.use(express.static("public"));
+app.use(express.static("front-end"));
 app.use(bodyParser.json());
 homeRouter(app);
 
-
+app.use(express.static(""))
 
 
 //中间件 登陆，验证，跨域，权限
