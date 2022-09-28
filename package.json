@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node your-script.js"
+    "start": "node app.js",
+    "build": "cd public/front-end && npm install && npm run build"
   },
   "repository": {
     "type": "git",
