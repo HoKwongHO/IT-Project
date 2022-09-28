@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const homeRouter = require("./routes/homeRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 
 
 
@@ -19,11 +20,10 @@ const connect = async function() {
 }
 
 app.use(cors());
-app.use(express.static("front-end"));
+app.use("/", express.static(path.join(__dirname, 'public/front-end')));
 app.use(bodyParser.json());
 homeRouter(app);
 
-app.use(express.static(""))
 
 
 //中间件 登陆，验证，跨域，权限
