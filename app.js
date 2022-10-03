@@ -20,17 +20,9 @@ const connect = async function() {
 }
 
 app.use(cors());
-//app.use("/", express.static(path.join(__dirname, 'public/front-end')));
-app.use("/", express.static(path.resolve(__dirname, './public/front-end')));
-app.get("/api", (req, res) => {
-    res.json({ message: "Hello from server!" });
-});
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, './public/front-end', 'index.html'));
-  });
+app.use("/", express.static(path.join(__dirname, 'public/front-end')));
 app.use(bodyParser.json());
 homeRouter(app);
-
 
 
 
