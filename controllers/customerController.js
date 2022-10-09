@@ -100,7 +100,7 @@ const getAllProducts= async (req,res) => {
 }
 const searching = async(req, res) => {
     let payload = req.body.payload.trim();
-    let search = await UserModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
+    let search = await DataModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
     res.send({payload: search});
 }
 
