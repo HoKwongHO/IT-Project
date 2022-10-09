@@ -20,7 +20,7 @@ const connect = async function() {
 }
 
 app.use(cors());
-app.use("/", express.static(path.join(__dirname, 'public/front-end')));
+app.use(express.static(path.resolve(__dirname, '/public/front-end/build')));
 app.use(bodyParser.json());
 homeRouter(app);
 

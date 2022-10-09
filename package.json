@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "build": "cd public/front-end && npm install && npm run build"
+    "build": "cd public/front-end && npm install --legacy-peer-deps && npm run build"
   },
   "repository": {
     "type": "git",
