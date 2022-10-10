@@ -20,6 +20,10 @@ const productSchema = mongoose.Schema({
   },
   catogory: {
     type: String,
+    enum: {
+      value: ["drink", "snack", "fruit", "others"],
+      message: "Enter Invalid Value", // Print error message.
+    },
   },
   description: {
     type: String,

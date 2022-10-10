@@ -4,9 +4,10 @@ const {
   updateProduct,
   deleteProduct,
 } = require("../controllers/productController");
-const { login, getStaff } = require("../controllers/staffController");
+const { staffLogin, getStaff } = require("../controllers/staffController");
+const passport = require("passport");
 const staffRouter = (app) => {
-  app.route("/staffLogin").post(login);
+  app.route("/staffLogin").post(staffLogin);
   app.route("/staffProfile").get(getStaff);
   app.route("/addProduct").post(createProduct);
   app.route("/updateProduct").post(updateProduct);

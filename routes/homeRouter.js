@@ -16,7 +16,7 @@ const {
   deleteProduct,
 } = require("../controllers/productController");
 const { staffLogin, getStaff } = require("../controllers/staffController");
-
+const { authUser, authRole } = require("../basicAuth");
 const homeRouter = (app) => {
   app.route("/User").get(getUser);
   app.route("/search").get(getSearch);
