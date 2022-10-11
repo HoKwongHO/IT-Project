@@ -89,14 +89,10 @@ const deleteUser = (req, res) => {
 }
 
 const getAllProducts= async (req,res) => {
-    try{
-        const products = await DataModel.find().lean()
-        console.log(products);
-        console.log(typeof (products));
-        res.send(products)
-    }catch(err){
-        console.log("error with displaying data: ", err)
-    }
+    let products = DataModel.find({}).exec();
+    res.send(products);
+        // .then((items) => res.json(items))
+        // .catch((err) => console.log(err));
 }
 const searching = async(req, res) => {
     let payload = req.body.payload.trim();
