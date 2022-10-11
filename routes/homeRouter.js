@@ -1,4 +1,4 @@
-const { createUser, login, updateUser, deleteUser, getAllProducts, searching, getSearch, getUser } = require("../controllers/customerController");
+const { createUser, login, updateUser, deleteUser, getAllProducts, searching, getSearch, getUser, productInfo} = require("../controllers/customerController");
 const validate = require("../middleware/validdate");
 const registerUserSchema = require("../schema/userSchema");
 const multer  = require('multer-upgrade');
@@ -12,6 +12,7 @@ const {
 const {  staffLogin,
     getStaff,} = require("../controllers/staffController");
 const homeRouter = (app) =>  {
+    app.route("/").get(getAllProducts);
     app.route("/User").get(getUser);
     app.route("/search").get(getSearch);
     app.route("/register").post(validate(registerUserSchema), createUser);
@@ -19,7 +20,7 @@ const homeRouter = (app) =>  {
     app.route("/update").post(updateUser);
     app.route("/delete").post(deleteUser);
     app.route("/all-product").get(getAllProducts);
-    app.route("/getUser").post(searching);
+    app.route("/searching").post(searching);
     app.route("/upload").post(uploadMulter.any(), upload);
     app.route("/preview/:key").get((req,res) => {
         res.sendFile(`/${req.params.key}`, {
@@ -34,7 +35,7 @@ const homeRouter = (app) =>  {
     app.route("/addProduct").post(createProduct);
     app.route("/updateProduct").post(updateProduct);
     app.route("/deleteProduct").post(deleteProduct);
-    // app.route("/patient_info/:_id"),get(productInfo);
+    app.route("/all-product/:_id").get(productInfo);
 }
 
 

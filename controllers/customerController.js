@@ -92,15 +92,15 @@ const getAllProducts= async (req,res) => {
     try{
         const products = await DataModel.find().lean()
         console.log(products);
-        res.render('product_demo.hbs',
-            {products:products, layout:"main"})
+        console.log(typeof (products));
+        res.send(products)
     }catch(err){
         console.log("error with displaying data: ", err)
     }
 }
 const searching = async(req, res) => {
     let payload = req.body.payload.trim();
-    let search = await UserModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
+    let search = await DataModel.find({email: {$regex: new RegExp('.*'+payload+'.*', 'i')}}).exec();
     res.send({payload: search});
 }
 
@@ -112,10 +112,10 @@ const getUser = (req, res) => {
     res.sendFile("/views/index.html", {root: __dirname+"/.."});
 };
 
-//   const productInfo =  async (req, res) => {
-//     const product = await DataModel.findById(req.params._id).lean();
-//     res.render('patient_info',{clinicianName: cli.name, patient: patient, layout:"demo"});
-//   };
+  const productInfo =  async (req, res) => {
+    const product = await DataModel.findById(req.params._id).lean();
+    res.send(product);
+  };
 
 // const searchInfo =  async (req,res) => {
 //     try{
@@ -133,6 +133,7 @@ module.exports = {
     getAllProducts,
     searching,
     getSearch,
-    getUser
+    getUser,
+    productInfo
     //productInfo
 }

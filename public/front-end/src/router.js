@@ -5,6 +5,7 @@ import Apple from "./App";
 import Login from './Login/login'
 import Register from './Register/register';
 import Demo from './demopage/submit'
+import Search from './Components/Search/Search';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path='/demo' element = {<Demo />} />
+      <Route path='/search' element = {<Search />} />
     </Routes>
   </BrowserRouter>
 }

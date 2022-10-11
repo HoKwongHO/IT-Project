@@ -20,22 +20,27 @@ function App() {
       img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
       detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
     },
-    {
-      title: 'test',
-      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
-      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
-    },
-    {
-      title: 'test',
-      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
-      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
-    },
-    {
-      title: 'test',
-      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
-      detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
-    }
+    // {
+    //   title: 'test',
+    //   img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+    //   detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    // },
+    // {
+    //   title: 'test',
+    //   img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+    //   detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    // },
+    // {
+    //   title: 'test',
+    //   img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+    //   detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    // }
   ]);
+
+  console.log(list)
+
+
+
 
   const initData = () => {
     axios({
