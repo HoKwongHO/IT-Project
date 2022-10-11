@@ -33,6 +33,9 @@ homeRouter(app);
 //     res.send("1");
 // })
 
+app.get("/api", (req, res) => {
+    res.json({ message: "Hello from server!" });
+  });
 
 app.listen(config.port,()=> {
     connect();

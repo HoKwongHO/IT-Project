@@ -27,6 +27,7 @@ function Login() {
     const res = await fetch("http://localhost:3030/login", { method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({ email, password }) });
     const data = await res.json();
     console.log(data);
+    window.location = '/';
   };
   const registerbtn = async() => {
     const res = await fetch("http://localhost:3030/register" ,{method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({nickname, email, password})});
