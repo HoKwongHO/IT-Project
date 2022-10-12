@@ -4,6 +4,7 @@ import List from "./searchList"
 import "./Search.css";
 
 function Search() {
+
     
     const [inputText, setInputText] = useState("");
     let inputHandler = (e) => {
