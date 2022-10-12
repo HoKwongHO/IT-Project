@@ -5,11 +5,11 @@ let itemSchema = new mongoose.schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
-    },
-    productName: {
-        type: String,
-        required: true,
     }
+    //productName: {
+    //    type: String,
+     //   required: true,
+    //}
 }, {
     timestamps: true,
 })
@@ -25,10 +25,6 @@ const favourCartSchema = new mongoose.schema({
 
    items: [itemSchema],
 
-   recordDate: {
-   type: String, 
-   required: true
-   },
 },{
     timestamps: { createdAt: "createTime", updatedAt: "updateTime" },
 })
