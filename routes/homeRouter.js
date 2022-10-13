@@ -4,6 +4,10 @@ const registerUserSchema = require("../schema/userSchema");
 const multer  = require('multer-upgrade');
 const { $where } = require("../models/customerModel");
 const config = require("../config");
+const cartRouter = require("./cartRouter");
+const searchRouter = require("./searchRouter");
+const productRouter = require("./productRouter");
+
 const {
     createProduct,
     updateProduct,
@@ -17,10 +21,13 @@ const homeRouter = (app) =>  {
     app.route("/search").get(getSearch);
     app.route("/register").post(validate(registerUserSchema), createUser);
     app.route("/login").post(login);
+    app.use("/collection-cart", cartRouter);
     app.route("/update").post(updateUser);
     app.route("/delete").post(deleteUser);
-    app.route("/all-product").get(getAllProducts);
-    app.route("/searching").post(searching);
+    app.use("/all-product", productRouter);
+    //app.route("/all-product").get(getAllProducts);
+    app.use("/searching", searchRouter);
+    //app.route("/searching/:_id").get(productInfo);
     app.route("/upload").post(uploadMulter.any(), upload);
     app.route("/preview/:key").get((req,res) => {
         res.sendFile(`/${req.params.key}`, {
