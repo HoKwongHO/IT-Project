@@ -7,6 +7,28 @@ const homeRouter = require("./routes/homeRouter");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require('path');
+require("dotenv").config();
+const passport = require('passport')
+require('./passport')(passport);
+const session = require("express-session")
+const flash = require("express-flash")
+
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'HONERS',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        sameSite: 'strict',
+        httpOnly: true,
+        secure: app.get('env') === 'production'
+    }
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
+if (app.get('env') === 'production') {
+    app.set('trust proxy', 1); // Trust first proxy
+    }
 
 
 

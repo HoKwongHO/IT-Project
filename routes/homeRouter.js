@@ -7,6 +7,7 @@ const config = require("../config");
 const cartRouter = require("./cartRouter");
 const searchRouter = require("./searchRouter");
 const productRouter = require("./productRouter");
+const auth = require("../controllers/login"); // Check whether login, or has no authority
 
 const {
     createProduct,
@@ -21,10 +22,10 @@ const homeRouter = (app) =>  {
     app.route("/search").get(getSearch);
     app.route("/register").post(validate(registerUserSchema), createUser);
     app.route("/login").post(login);
-    app.use("/collection-cart", cartRouter);
+    app.use("/collection-cart", cartRouter, auth.isLoginCustomer);
     app.route("/update").post(updateUser);
     app.route("/delete").post(deleteUser);
-    app.use("/all-product", productRouter);
+    app.use("/all-product", productRouter, auth.isLoginCustomer);
     //app.route("/all-product").get(getAllProducts);
     app.use("/searching", searchRouter);
     //app.route("/searching/:_id").get(productInfo);
@@ -38,11 +39,11 @@ const homeRouter = (app) =>  {
         })
       });
     app.route("/staffLogin").post(staffLogin);
-    app.route("/profile").get(getStaff);
-    app.route("/addProduct").post(createProduct);
-    app.route("/updateProduct").post(updateProduct);
-    app.route("/deleteProduct").post(deleteProduct);
-    app.route("/all-product/:_id").get(productInfo);
+    app.route("/profile").get(getStaff, auth.isLoginStaff);
+    app.route("/addProduct").post(createProduct, auth.isLoginStaff);
+    app.route("/updateProduct").post(updateProduct, auth.isLoginStaff);
+    app.route("/deleteProduct").post(deleteProduct, auth.isLoginStaff);
+    app.route("/all-product/:_id").get(productInfo, auth.isLoginStaff);
 }
 
 
