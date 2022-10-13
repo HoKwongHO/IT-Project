@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Use itemSchema to store the information about product
-let itemSchema = new mongoose.schema({
+let itemSchema = mongoose.Schema({
     productId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Product"
@@ -15,7 +15,7 @@ let itemSchema = new mongoose.schema({
 })
 
 // Each customer will have a favourites cart which stores a list of products
-const favourCartSchema = new mongoose.schema({
+const favourCartSchema = mongoose.Schema({
 
    customer: {
     type: mongoose.Schema.Types.ObjectId,
