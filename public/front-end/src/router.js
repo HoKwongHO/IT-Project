@@ -6,6 +6,7 @@ import Login from './Login/login'
 import Register from './Register/register';
 import Demo from './demopage/submit'
 import Search from './Components/Search/Search';
+import Stafflogin from './Login/staffLogin';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
       <Route path="/register" element={<Register />} />
       <Route path='/demo' element = {<Demo />} />
       <Route path='/search' element = {<Search />} />
+      <Route path='/stafflogin' element = {<Stafflogin />} />
     </Routes>
   </BrowserRouter>
 }
