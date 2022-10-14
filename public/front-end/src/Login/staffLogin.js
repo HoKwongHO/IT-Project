@@ -17,13 +17,15 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function Login() {
+function staffLogin() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   //const [isLogin,setLogin] = useState(true);
   const loginbtn = async () => {
-    const res = await fetch("http://localhost:3030/stafflogin", { method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({ email, password }) });
+    const res = await fetch("http://localhost:3030/stafflogin", { method: "post", headers: {
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({ email: email, password: password }) });
     const data = await res.json();
     console.log(data);
     window.location = '/';
@@ -88,4 +90,4 @@ function Login() {
 
 
 
-export default Login;
+export default staffLogin;

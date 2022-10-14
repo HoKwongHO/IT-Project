@@ -1,4 +1,4 @@
-const LocalStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local')
 const bcrypt = require("bcrypt");
 
 // import staff and customer models
@@ -75,25 +75,48 @@ module.exports = (passport) => {
   passport.use(
     "staff_login",
     new LocalStrategy({
-      usernameField: "userID",
+      usernameField: "email",
       passwordField: "password",
       passReqToCallback: true
     },
-    (req, userID, password, done) => {
+    (req, email, password, done) => {
       process.nextTick(()=>{
-        Doctor.findOne({'email': userID}, async(err, staff)=>{
+        Staff.findOne({'email': email}, async(err, staff)=>{
+          console.log("48")
           if(err){
             return done(err)
-          }
-        
-          if(!staff){
+             
+          }else if(!staff){
             return done(null, false, req.flash('loginMessage', 'Can not find a user.'))
-          }else if (!await bcrypt.compare(password, staff.password)){
-            return done(null, false, req.flash('loginMessage', 'incorrect password.'))
-          }else{
-            req.session.userID = userID
-            return done(null, staff, req.flash('loginMessage', 'Login successful'));
           }
+          // Check password
+          staff.verifyPassword(password,(err, valid) =>{
+            console.log("66")
+            if(err){
+              return done(err)
+            }
+            if(!valid){
+              console.log("99")
+              return done(null, false,  req.flash('loginMessage', 'Incorrect Password'))
+            }
+            // If user and password all correct
+            req.session.userID = email
+            console.log("88")
+           
+            return done(null, staff, req.flash('loginMessage', 'Log In Successfully'))
+          })
+          // if(err){
+          //   return done(err)
+          // }
+        
+          // if(!staff){
+          //   return done(null, false, req.flash('loginMessage', 'Can not find a user.'))
+          // }else if (!await bcrypt.compare(password, staff.password)){
+          //   return done(null, false, req.flash('loginMessage', 'incorrect password.'))
+          // }else{
+          //   req.session.userID = email
+          //   return done(null, staff, req.flash('loginMessage', 'Login successful'));
+          // }
     
           
         })

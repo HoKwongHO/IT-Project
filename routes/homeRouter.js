@@ -8,6 +8,7 @@ const cartRouter = require("./cartRouter");
 const searchRouter = require("./searchRouter");
 const productRouter = require("./productRouter");
 const auth = require("../controllers/login"); // Check whether login, or has no authority
+//const staffRouter = require("./staffRouter");
 
 const passport = require('passport')
 require('../passport')(passport)
@@ -28,6 +29,10 @@ const homeRouter = (app) =>  {
       successRedirect: "/",
       failureRedirect: "/login",
       failureFlash: true}));
+    app.route("/stafflogin").post(passport.authenticate('staff_login',{
+      successRedirect: "/",
+      failureRedirect: "/stafflogin",
+      failureFlash: true}));
     app.use("/collection-cart", cartRouter, auth.isLoginCustomer);
     app.route("/update").post(updateUser);
     app.route("/delete").post(deleteUser);
@@ -44,7 +49,10 @@ const homeRouter = (app) =>  {
           }
         })
       });
-    app.route("/staffLogin").post(staffLogin);
+    // app.route("/stafflogin").post(passport.authenticate('staff_login',{
+    //   successRedirect: "/",
+    //   failureRedirect: "/stafflogin",
+    //   failureFlash: true}));
     app.route("/profile").get(getStaff, auth.isLoginStaff);
     app.route("/addProduct").post(createProduct, auth.isLoginStaff);
     app.route("/updateProduct").post(updateProduct, auth.isLoginStaff);

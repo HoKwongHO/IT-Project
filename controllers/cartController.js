@@ -5,7 +5,7 @@ const Product = require("../models/productModel")
 const createCart = async(req, res) => {
     try{
         let payload = {
-            customer: req.params._id,
+            customer: req.session.userID,
             item:{}
         }
         let cart = await cartRepository.createCart({...payload})
