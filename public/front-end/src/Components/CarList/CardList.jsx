@@ -8,7 +8,7 @@ const CardList = ({ cardList }) => {
     <div className="cardList">
         { cardList.map((item) => {
             return (
-                <Card info={item} />
+                <Card info={item} key={item._id}/>
             )
         }) }
     </div>

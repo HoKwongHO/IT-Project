@@ -16,8 +16,10 @@ function App() {
   const { theme } = useThemeContext();
   const [list,setList] = useState([
     {
-      title: 'test',
-      img: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+      _id: '1',
+      name: 'test',
+      picture: "https://cdn4.buysellads.net/uu/1/122891/1662660010-carbon.jpg",
+      price: 4,
       detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
     },
     // {
@@ -39,22 +41,27 @@ function App() {
 
   console.log(list)
 
-
-
-
-  const initData = () => {
-    axios({
-      url: "http://localhost:3030/initProduct"
-    }).then(res => {
-      if(res.status == 200) {
-        setList([].splice.call(res.data,0,4))
-      }
-    })
-  }
-
   useEffect(() => {
-    initData();
-  },[])
+    fetch("http://localhost:3030/all-product")
+        .then((res) => res.json())
+        .then((jsonRes) => setList(jsonRes));
+}, []);    
+
+console.log(list)
+
+  // const initData = () => {
+  //   axios({
+  //     url: "http://localhost:3030/initProduct"
+  //   }).then(res => {
+  //     if(res.status == 200) {
+  //       setList([].splice.call(res.data,0,4))
+  //     }
+  //   })
+  // }
+
+  // useEffect(() => {
+  //   initData();
+  // },[])
 
   const [info,setInfo] = useState({
     title: "Detail Title",
@@ -64,7 +71,7 @@ function App() {
     <>
       <div className="App" style={{background: theme == 'light' ? 'white': 'black'}}>
         <Header></Header>
-        <CardList cardList={list}/>
+        {/* <CardList cardList={list}/> */}
         <h3 className="hotTitle">In-Store Hot Product.</h3>
         <CardList cardList={list}/>
         <Information info={info}/>
