@@ -1,4 +1,5 @@
 const validate = require("../middleware/validdate");
+const auth = require("../controllers/login"); 
 const {
   createProduct,
   updateProduct,
@@ -7,10 +8,10 @@ const {
 const { login, getStaff } = require("../controllers/staffController");
 const productRouter = (app) => {
   app.route("/staffLogin").post(login);
-  app.route("/profile").get(getStaff);
-  app.route("/addProduct").post(createProduct);
-  app.route("/updateProduct").post(updateProduct);
-  app.route("/deleteProduct").post(deleteProduct);
+  app.route("/profile").get(getStaff, auth.isLoginStaff);
+  app.route("/addProduct").post(createProduct, auth.isLoginStaff);
+  app.route("/updateProduct").post(updateProduct, auth.isLoginStaff);
+  app.route("/deleteProduct").post(deleteProduct, auth.isLoginStaff);
 
   // app.route("/patient_info/:_id"),get(productInfo);
 };

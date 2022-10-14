@@ -18,6 +18,8 @@ var customerSchema = mongoose.Schema({
         required: true,
 
     },
+    role: {
+        type: String, default: "customer"},
   },
   {
       timestamps: { createdAt: "createTime", updatedAt: "updateTime" },

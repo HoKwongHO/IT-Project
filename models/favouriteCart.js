@@ -1,7 +1,21 @@
 const mongoose = require("mongoose");
 
+// Use itemSchema to store the information about product
+let itemSchema = mongoose.Schema({
+    productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product"
+    }
+    //productName: {
+    //    type: String,
+     //   required: true,
+    //}
+}, {
+    timestamps: true,
+})
 
-const favourCartSchema = new mongoose.schema({
+// Each customer will have a favourites cart which stores a list of products
+const favourCartSchema = mongoose.Schema({
 
    customer: {
     type: mongoose.Schema.Types.ObjectId,
@@ -9,38 +23,11 @@ const favourCartSchema = new mongoose.schema({
     required: true,
    },
 
-   products: [{
-    productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product"
-    },
-    productName: {
-        type: String,
-        required: true,
-    },
-    category: {
-        type: String, 
-        enum: {
-            value: ['drink', 'snack', 'fruit'],
-            message: 'Enter Invalid Value', // Print error message.
-        },
-        img: {
-            type: String,
-            data: Buffer,
-        },
-        required: true,
-    }
-   }],
+   items: [itemSchema],
 
-   recordDate: {
-   type: String, 
-   required: true
-   },
-},
-
-{
+},{
     timestamps: { createdAt: "createTime", updatedAt: "updateTime" },
 })
 
-const favourCart = mongoose.model("favourCart", favourCart);
+const favourCart = mongoose.model("favourCart", favourCartSchema);
 module.exports = favourCart;
