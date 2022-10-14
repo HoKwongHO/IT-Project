@@ -9,6 +9,9 @@ const searchRouter = require("./searchRouter");
 const productRouter = require("./productRouter");
 const auth = require("../controllers/login"); // Check whether login, or has no authority
 
+const passport = require('passport')
+require('../passport')(passport)
+
 const {
     createProduct,
     updateProduct,
@@ -21,7 +24,10 @@ const homeRouter = (app) =>  {
     app.route("/User").get(getUser);
     app.route("/search").get(getSearch);
     app.route("/register").post(validate(registerUserSchema), createUser);
-    app.route("/login").post(login);
+    app.route("/login").post(passport.authenticate('customer_login',{
+      successRedirect: "/",
+      failureRedirect: "/login",
+      failureFlash: true}));
     app.use("/collection-cart", cartRouter, auth.isLoginCustomer);
     app.route("/update").post(updateUser);
     app.route("/delete").post(deleteUser);

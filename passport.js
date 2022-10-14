@@ -37,13 +37,13 @@ module.exports = (passport) => {
   passport.use(
     "customer_login",
     new LocalStrategy({
-      usernameField: "userID",
+      usernameField: "email",
       passwordField: "password",
       passReqToCallback: true
     },
-    (req, userID, password, done) => {
+    (req, email, password, done) => {
       process.nextTick(()=>{
-        Customer.findOne({'email': userID}, async(err, customer)=>{
+        Customer.findOne({'email': email}, async(err, customer)=>{
           if(err){
             return done(err)
              
@@ -51,15 +51,17 @@ module.exports = (passport) => {
             return done(null, false, req.flash('loginMessage', 'Can not find a user.'))
           }
           // Check password
-          customer.verifyPassword(password,(err, valid) =>{
+          customer.validatePassword(password,(err, valid) =>{
             if(err){
               return done(err)
             }
             if(!valid){
+             
               return done(null, false,  req.flash('loginMessage', 'Incorrect Password'))
             }
             // If user and password all correct
-            req.session.userID = userID
+            req.session.userID = email
+           
             return done(null, customer, req.flash('loginMessage', 'Log In Successfully'))
           })
     

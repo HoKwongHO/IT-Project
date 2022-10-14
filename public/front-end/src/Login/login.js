@@ -24,7 +24,11 @@ function Login() {
   const [password, setPassword] = useState("");
   const [isLogin,setLogin] = useState(true);
   const loginbtn = async () => {
-    const res = await fetch("http://localhost:3030/login", { method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({ email, password }) });
+    console.log(email, password);
+    const res = await fetch("http://localhost:3030/login", { method: "post", headers: {
+      'Content-Type': 'application/json'
+    }, body: JSON.stringify({ email: email, password: password }) });
+    console.log(res);
     const data = await res.json();
     console.log(data);
     window.location = '/';

@@ -23,6 +23,10 @@ app.use(session({
         secure: app.get('env') === 'production'
     }
 }))
+
+app.use(express.json());
+app.use(express.urlencoded({extended : true}))
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
