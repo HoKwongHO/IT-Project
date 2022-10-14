@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import data from "./listDemo.json"
+import Card from '../Card/Card';
 // const data = fetch("http://localhost:3030/all-product").then(res => res.json())
 // console.log(data)
 function List(props) {
@@ -28,9 +29,7 @@ function List(props) {
     return (
         <ul>
             {filteredData.map((item) => (
-                <li key={item._id}>
-                     <Link to={"/"+item._id}>{item.name}</Link>
-                </li>
+                <Card info={item} key={item._id}/>
             ))}
         </ul>
     )
