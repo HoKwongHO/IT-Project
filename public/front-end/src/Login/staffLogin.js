@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-function staffLogin() {
+function StaffLogin() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -90,4 +90,4 @@ function staffLogin() {
 
 
 
-export default staffLogin;
+export default StaffLogin;
