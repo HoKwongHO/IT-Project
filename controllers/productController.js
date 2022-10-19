@@ -12,6 +12,28 @@ const upload = multer({
   storage: Storage,
 }).single("picture");
 
+const initProduct = (req,res) => {
+  productModel.find({},(err,products) => {
+    if (err) {
+      res.status(500).json({ msg: "Server error!" });
+    } else {
+        res.status(200).json(products);
+    }
+  })
+}
+
+const getProductInfo = (req,res) => {
+  const { id } = req.query;
+  console.log('query',id)
+  productModel.findOne({_id: id},(err, info) => {
+    if (err) {
+      res.status(500).json({ msg: "Server error!" });
+    } else {
+        res.status(200).json(info);
+    }
+  })
+}
+
 const createProduct = (req, res) => {
   const input = req.body;
   productModel.findOne({ name: input.name }, (err, result) => {
@@ -121,8 +143,7 @@ const updateProduct = async (req, res) => {
   }
 };
 
-//Delet product
-
+//Delete product
 const deleteProduct = (req, res) => {
   const input = req.body;
   productModel.findOneAndDelete(
@@ -140,7 +161,9 @@ const deleteProduct = (req, res) => {
 
 module.exports = {
   upload,
+  initProduct,
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductInfo
 };

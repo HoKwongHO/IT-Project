@@ -1,0 +1,35 @@
+.wrapper1 {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-image: url(https://images.unsplash.com/photo-1557821552-17105176677c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2064&q=80);
+}
+
+.loginWrapper {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform: translate(-50%,-50%);
+    width: 380px;
+    height: 630px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 20px;
+    background: rgb(243, 242, 242);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+#input-with-icon-adornment {
+    width: 100%;
+}
+
+.required {
+    color: red;
+}
+
+.hint {
+    color: rgb(67, 67, 67);
+}

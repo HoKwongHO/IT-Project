@@ -63,9 +63,22 @@ app.get("/api", (req, res) => {
     res.json({ message: "Hello from server!" });
   });
 
-app.listen(config.port,()=> {
+app.listen(process.env.PORT||config.port,()=> {
     connect();
 
     console.log(`server is listening ${config.baseUrl}`)
 })
 
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+
+
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+});
+
+// if (process.env.NODE_ENV) {
+//     app.use(express.static('frontend/build'))
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.resolve(process.cwd(), 'frontend/build/index.html'))
+//       })
+//   }

@@ -1,0 +1,104 @@
+.adminWrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    padding: 70px 65px 35px;
+    background-image: url(https://media.istockphoto.com/photos/shopping-basket-with-fresh-food-grocery-supermarket-food-and-eats-picture-id1216828053?k=20&m=1216828053&s=612x612&w=0&h=mMGSO8bG8aN0gP4wyXC17WDIcf9zcqIxBd-WZto-yeg=);
+}
+
+.prodWrapper {
+    padding: 20px;
+    background: white;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25); 
+}
+
+.itemImg {
+    width: 100px !important;
+    height: 100px;
+}
+
+.headerTab {
+    display: flex;
+    height: 40px;
+    padding: 0 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0;
+    background: rgb(71, 71, 71);
+}
+
+.tabItem {
+    flex: 1;
+    font-weight: bold;
+    text-align: left;
+    color:white !important;
+}
+
+.itemImg span {
+    color: 14px;
+    margin-right: 20px;
+}
+
+.itemImg img {
+    width: 100px;
+    height: 100px;
+}
+
+.productItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgb(239, 236, 236);
+}
+
+.productItem div {
+    flex: 1;
+}
+
+.relative {
+    position: relative;
+}
+
+.addBtn {
+    position: absolute;
+    display: inline-block;
+    right: 20px;
+    top: 20px;
+    background: black;
+    color:white;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+.editPanel {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    border-radius: 15px;
+    box-sizing: border-box;
+    padding: 30px 50px;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    -o-transform: translate(-50%,-50%);
+}
+
+#input-with-icon-adornment {
+    width: 100%;
+}

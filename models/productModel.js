@@ -9,14 +9,9 @@ const productSchema = mongoose.Schema({
     type: Number,
   },
   picture: {
-    // data: Buffer,
-    // contentType: String,
     type: String,
     default: ""
   },
-//   picdir: {
-//     type: String,
-//   },
   storage: {
     type: Number,
   },

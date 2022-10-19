@@ -1,7 +1,7 @@
 
 exports.upload = async (req, res) => {
     const files = req.files;
-    logger.info('上传文件信息：', files);
+    logger.info('uploaded info:', files);
     if (!files.length) {
       return res.error('402009');
     }

@@ -1,4 +1,4 @@
-const { createUser, login, updateUser, deleteUser, getAllProducts, searching, getSearch, getUser, productInfo} = require("../controllers/customerController");
+const { createUser, login, updateUser, deleteUser, getAllProducts, searching, productInfo} = require("../controllers/customerController");
 const validate = require("../middleware/validdate");
 const registerUserSchema = require("../schema/userSchema");
 const multer  = require('multer-upgrade');
@@ -21,13 +21,17 @@ const {
 const {  staffLogin,
     getStaff,} = require("../controllers/staffController");
 const homeRouter = (app) =>  {
-    app.route("/").get(getAllProducts);
-    app.route("/User").get(getUser);
-    app.route("/search").get(getSearch);
+    // app.route("/").get(getAllProducts);
+    // app.route("/User").get(getUser);
+    // app.route("/search").get(getSearch);
     app.route("/register").post(validate(registerUserSchema), createUser);
     app.route("/login").post(passport.authenticate('customer_login',{
       successRedirect: "/",
       failureRedirect: "/login",
+      failureFlash: true}));
+    app.route("/stafflogin").post(passport.authenticate('staff_login',{
+      successRedirect: "/all-product",
+      failureRedirect: "/stafflogin",
       failureFlash: true}));
     app.route("/stafflogin").post(passport.authenticate('staff_login',{
       successRedirect: "/",

@@ -5,9 +5,9 @@ const mongoose = require("mongoose");
 const staffModel = require("../models/staffModel");
 const productModel = require("../models/productModel");
 
-mongoose.connect(
-  "mongodb+srv://honoers:honoers@cluster0.0sms5sf.mongodb.net/?retryWrites=true&w=majority"
-);
+// mongoose.connect(
+//   "mongodb+srv://honoers:honoers@cluster0.0sms5sf.mongodb.net/?retryWrites=true&w=majority"
+// );
 
 const staffLogin = (req, res) => {
   const { email, password } = req.body;

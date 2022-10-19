@@ -3,7 +3,7 @@ const DataModel = require("../models/productModel");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-//增删改查
+
 const login = (req, res) =>{
     const {email, password } = req.body;
     UserModel.findOne({email}, (err, user)=>{
@@ -70,7 +70,7 @@ const updateUser  = async (req, res) => {
 }
 
 const encrypt = async (password) => {
-    const salt = await bcrypt.genSalt(saltRounds); //使用bcrypt 模块进行数据加密
+    const salt = await bcrypt.genSalt(saltRounds);
     const hash = bcrypt.hashSync(password, salt); //hash
     return hash;
 }
@@ -99,17 +99,17 @@ const searching = async(req, res) => {
     res.send({payload: search});
 }
 
-const getSearch = (req, res) => {
-    res.sendFile("/views/search-demo.html", {root: __dirname+"/.."});
-};
+// const getSearch = (req, res) => {
+//     res.sendFile("/views/search-demo.html", {root: __dirname+"/.."});
+// };
 
-const getUser = (req, res) => {
-    res.sendFile("/views/index.html", {root: __dirname+"/.."});
-};
+// const getUser = (req, res) => {
+//     res.sendFile("/views/index.html", {root: __dirname+"/.."});
+// };
 
   const productInfo =  async (req, res) => {
-    const product = await DataModel.findById(req.params._id).lean();
-    res.send(product);
+    DataModel.findById(req.params._id).then((items) => res.json(items))
+    .catch((err) => console.log(err));
   };
 
 // const searchInfo =  async (req,res) => {
@@ -127,8 +127,8 @@ module.exports = {
     deleteUser,
     getAllProducts,
     searching,
-    getSearch,
-    getUser,
+    // getSearch,
+    // getUser,
     productInfo
     //productInfo
 }

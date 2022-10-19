@@ -36,10 +36,10 @@ customerSchema.pre("save", async function (next) { // Hash the password before s
     return next()
   }) 
 
-  customerSchema.methods.validatePassword = function (password, callback) { //在model上挂载密码验证函数
+  customerSchema.methods.validatePassword = function (password, callback) {
     const customer = this;
     //hash
-    bcrypt.compare(password, customer.password, (err, isMatch) => { //通过bcrypt的compare函数进行解密处理
+    bcrypt.compare(password, customer.password, (err, isMatch) => {
       if (err) return callback(err);
       callback(null, isMatch);
     });

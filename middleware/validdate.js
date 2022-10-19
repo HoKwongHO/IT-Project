@@ -11,7 +11,7 @@ const validate = ( schema ) => ( req,res,next) => {
         res.status(201).json({
             status: 400,
             data: {
-                msg: e.issues[0].message || "信息格式错误", 
+                msg: e.issues[0].message || "wrong format", 
             }
         })
     }
