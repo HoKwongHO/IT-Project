@@ -2,6 +2,7 @@ const UserModel = require("../models/customerModel");
 const DataModel = require("../models/productModel");
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
+const cartController = require("../controllers/cartController")
 
 
 const login = (req, res) =>{
@@ -29,7 +30,7 @@ const login = (req, res) =>{
     })
 };
 
-const createUser = (req, res)=> {
+const createUser = (req, res, next)=> {
     const {nickname, email, password } = req.body;
     UserModel.findOne({email}, (err, result)=> {
         if (err) {
@@ -47,7 +48,9 @@ const createUser = (req, res)=> {
 
                     }
                     else {
-                        res.status(200).json({msg:"Registered!",user});
+                        
+                        next()
+                        
                     }
                 });
             }

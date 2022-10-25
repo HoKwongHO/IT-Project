@@ -1,19 +1,22 @@
 const cartRepository = require("./cartRepository")
 const Product = require("../models/productModel")
+const Cart = require("../models/favouriteCart");
+const Client = require("../models/customerModel")
 
 
-const createCart = async(req, res) => {
+const createCart = async (req, res) => {
+    const {email } = req.body;
+
+    // Find Customer by email
+    const customer = await Client.findOne({"email": email});
+
+    const payload = {customer: customer,
+        items: []};
+
     try{
-        let payload = {
-            customer: req.session.userID,
-            item:{}
-        }
-        let cart = await cartRepository.createCart({...payload})
-        res.status(200).json({
-            status: true,
-            data: cart,
+        new Cart(payload).save((err, cart)=> {
+            res.status(200).json({msg:"Registered!", customer,  cart});
         })
-
     }catch(err){
         console.log(err)
         console.log("error: create Cart in cartController.js")

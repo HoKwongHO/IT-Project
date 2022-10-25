@@ -19,7 +19,7 @@ const favourCartSchema = mongoose.Schema({
 
    customer: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Customer",
+    ref: "customermodels",
     required: true,
    },
 

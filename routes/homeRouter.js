@@ -9,6 +9,7 @@ const searchRouter = require("./searchRouter");
 const productRouter = require("./productRouter");
 const auth = require("../controllers/login"); // Check whether login, or has no authority
 //const staffRouter = require("./staffRouter");
+const cartController = require("../controllers/cartController");
 
 const passport = require('passport')
 require('../passport')(passport)
@@ -24,17 +25,13 @@ const homeRouter = (app) =>  {
     // app.route("/").get(getAllProducts);
     // app.route("/User").get(getUser);
     // app.route("/search").get(getSearch);
-    app.route("/register").post(validate(registerUserSchema), createUser);
+    app.route("/register").post(validate(registerUserSchema), createUser, cartController.createCart);
     app.route("/login").post(passport.authenticate('customer_login',{
-      successRedirect: "/",
+      successRedirect: "/all-product",
       failureRedirect: "/login",
       failureFlash: true}));
     app.route("/stafflogin").post(passport.authenticate('staff_login',{
       successRedirect: "/all-product",
-      failureRedirect: "/stafflogin",
-      failureFlash: true}));
-    app.route("/stafflogin").post(passport.authenticate('staff_login',{
-      successRedirect: "/",
       failureRedirect: "/stafflogin",
       failureFlash: true}));
     app.use("/collection-cart", cartRouter, auth.isLoginCustomer);
