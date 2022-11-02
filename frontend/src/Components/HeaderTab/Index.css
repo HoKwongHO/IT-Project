@@ -1,0 +1,35 @@
+.listWrapper {
+    /* position: relative; */
+    width: 500px;
+    height: 100%;
+}
+
+.listWrapper  ul {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.listWrapper  ul li {
+    cursor: pointer;
+    color: black;
+    font-weight: bold;
+    padding: 0 15px;
+}
+
+
+.cardItem {
+    position: absolute;
+    left: 0;
+    top: 60px;
+    width: 100vw;
+    height: 200px;
+    background-color: aliceblue;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.cardItem ul li {
+    display: flex;
+    
+}

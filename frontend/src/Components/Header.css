@@ -1,0 +1,39 @@
+.head {
+    width: 100%;
+    height: 60px;
+    /* padding: 10px 20px; */
+    display: flex;
+    justify-content: space-between;
+    background-color: #084183;
+    align-items: center;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.imgBox {
+    height: 100%;
+    position: relative;
+    
+}
+
+.head img {
+    height: 100%;
+    width: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+h2 {
+  align-content: cente;
+}
+
+.switch {
+  color: red;
+}
+@media (max-width: 600px) {
+    
+}

@@ -1,0 +1,13 @@
+.sample img{
+    height: 200px;
+    width: auto;
+    position: relative;
+    top: 100px;
+}
+
+.list {
+        margin: auto;
+        width: 50%;
+        border: 3px solid ;
+        padding: 10px;
+}
