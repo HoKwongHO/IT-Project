@@ -29,7 +29,9 @@ const createCart = async (req, res) => {
 
 const fetchCart = async(req, res) => {
     try{
-        const cart = await cartRepository.getCart(req.params._id) 
+        console.log(req.session.passport.user._id)
+        // find the cart by user_id
+        const cart = await Cart.findOne({"customer": req.session.passport.user._id});
         // If there is no cart, then create a new one
         if (!cart){
             res.status(400).json({
@@ -37,6 +39,8 @@ const fetchCart = async(req, res) => {
                 msg: "Cart Not Found"
             })
         }
+        console.log("found")
+        console.log(cart)
         res.status(200).json({
             status: true,
             data: cart

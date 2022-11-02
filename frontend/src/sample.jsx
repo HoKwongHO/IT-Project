@@ -10,6 +10,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
+import { useEffect,useState } from 'react'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -24,6 +26,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Sample() {
   const classes = useStyles();
+  const [info,setInfo] = useState({})
+
+  const getCart = async () => {
+      fetch("/collection-cart/").then(res => {
+          setInfo(res.data)
+      })
+  } //已经把cart的数据传进来了
+  useEffect(() => {
+      getCart();
+  })
 
   return (
     <div>

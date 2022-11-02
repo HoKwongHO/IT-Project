@@ -93,7 +93,10 @@ const deleteUser = (req, res) => {
 
 const getAllProducts= async (req,res) => {
     DataModel.find({})
-        .then((items) => res.json(items))
+        .then((items) => {
+            //console.log(req.session.passport.user)
+            res.json(items)
+        })
         .catch((err) => console.log(err));
 }
 const searching = async(req, res) => {
