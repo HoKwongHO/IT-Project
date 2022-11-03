@@ -1,7 +1,7 @@
-const cartRepository = require("./cartRepository")
 const Product = require("../models/productModel")
 const Cart = require("../models/favouriteCart");
-const Client = require("../models/customerModel")
+const Client = require("../models/customerModel");
+const { findOne } = require("../models/productModel");
 
 
 const createCart = async (req, res) => {
@@ -104,10 +104,12 @@ const addItemToCart = async(req, res) => {
 }
 
 const removeItemFromCart = async(req, res) => {
-    const {customerId} = req.params._id
-    const {productId} = req.body_id
+    const customerId = req.session.passport.user._id
+    const productId = req.body._id
     try{
-        let cart = await cartRepository.removeItem(productId, customerId)
+        await Cart.findOneAndUpdate({customer: customerId}, {$pull: {items: {productId: productId}}});
+        console.log("removed successfully!")
+        const cart = await Cart.findOne({customer: customerId});
         res.status(200).json({
             type: "success",
             msg: "Remove Item From Cart Successfully!",

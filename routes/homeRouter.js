@@ -1,4 +1,4 @@
-const { createUser, login, updateUser, deleteUser, getAllProducts, searching, productInfo} = require("../controllers/customerController");
+const { createUser, login, updateUser, deleteUser, getAllProducts, searching, productInfo, logout} = require("../controllers/customerController");
 const validate = require("../middleware/validdate");
 const registerUserSchema = require("../schema/userSchema");
 const multer  = require('multer-upgrade');
@@ -50,6 +50,8 @@ const homeRouter = (app) =>  {
           }
         })
       });
+    app.route("/logout").post(auth.isLoginCustomer, logout);
+    
     // app.route("/stafflogin").post(passport.authenticate('staff_login',{
     //   successRedirect: "/",
     //   failureRedirect: "/stafflogin",

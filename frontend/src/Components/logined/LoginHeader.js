@@ -12,6 +12,11 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 
 export default function Header() {
   const {toggle} = useThemeContext();
+  const logoutBtn = async () => {
+    const res = await fetch("/logout", { method: "POST", headers: { "Content-type": "application/json" } });
+    const data = await res.json();
+    window.location = '/customerlogin';
+  }
   return (
     <div className='head'>
         <a href='/ClientLogined' style={{display: "block", height: "100%"}}><div className='imgBox'><img src = {Icon} alt = 'No img here'></img></div></a>
@@ -25,7 +30,7 @@ export default function Header() {
               <ShoppingCartIcon ></ShoppingCartIcon>
             </Link>
             <Brightness4Icon onClick={toggle}></Brightness4Icon>
-            <Button href='/'>Logout</Button></div>
+            <Button onClick={logoutBtn}>Logout</Button></div>
     </div>
   )
 }

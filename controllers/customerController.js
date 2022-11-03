@@ -126,6 +126,20 @@ const searching = async(req, res) => {
 //     }
 // };
 
+const logout = async (req, res) => {
+    try {
+        req.session.destroy(function(err){
+          console.log(err)
+        })
+          
+        res.status(200).json({msg:"Logout Successfully"});
+      } catch (err) {
+        console.log(err);
+        res.status(500).json({msg:"error happens when logout"});
+      }
+}
+
+
 module.exports = {
     createUser,
     login,
@@ -135,6 +149,7 @@ module.exports = {
     searching,
     // getSearch,
     // getUser,
-    productInfo
+    productInfo,
+    logout
     //productInfo
 }
