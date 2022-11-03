@@ -57,24 +57,42 @@ const fetchCart = async(req, res) => {
 }
 
 const addItemToCart = async(req, res) => {
-    const {customerId} = req.params._id
+    const productId = req.body._id;
+    const customerId = req.session.passport.user._id;
+    console.log("product", productId);
+    console.log("customer", customerId);
     try{
-        let payload = {
-            productId: req.body._id
-        }
-        let productDetail = await Product.findById(productId) 
+        // let payload = {
+        //     productId: req.body._id
+        // }
+        let productDetail = await Product.findOne({_id : productId}) 
+        console.log("11")
         if (!productDetail){
+            console.log("22")
             res.status(500).json({
                 type: "Not Found",
                 msg: "Invalid Request"
-        })
+            })
         }
-        let cart = await cartRepository.addItem(payload, customerId)
-        res.status(200).json({
-            type: "success",
-            msg: "Add Item To Cart Successfully!",
-            data: cart
-        })
+        const cart = await Cart.findOne({customer: customerId});
+        // Check if the item already existed in the cart
+        const item = Cart.findOne({customer: customerId, items:{$elemMatch: {productId: productId}}});
+        if (item){
+            console.log("Product ", productId, " Existed")
+            res.status(500).json({
+                type: "Product Existed",
+                msg: "Invalid Request"
+            })
+        }else{
+            cart.items.push(productId);
+            console.log("33")
+            await cart.save();
+            res.status(200).json({
+                type: "success",
+                msg: "Add Item To Cart Successfully!",
+                data: cart
+            })
+        }
     }catch(err){
         console.log(err)
         res.status(400).json({

@@ -4,6 +4,6 @@ const productRouter = require("express").Router();
 
 productRouter.get("/", customerController.getAllProducts);
 productRouter.get("/productInfo/:_id", customerController.productInfo);
-productRouter.post("/_id", cartController.addItemToCart);
+productRouter.post("/productInfo/:_id", cartController.addItemToCart);
 
 module.exports = productRouter;

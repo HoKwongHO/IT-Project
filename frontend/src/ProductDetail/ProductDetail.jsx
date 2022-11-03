@@ -11,12 +11,21 @@ import { Button, Link } from '@material-ui/core'
 function ProductDetail(props) {
     const { search } = useLocation();
     // const [id,setId] = useState("");
-    const [info,setInfo] = useState({})
+    const [info,setInfo] = useState({});
+    const [id, setId] = useState({});
 
     const initProductInfo = async () => {
         axios.get(`/all-product/productInfo/${ search.split('?id=')[1]}`).then(res => {
             setInfo(res.data)
+            setId(res.data._id)
         })
+    }
+
+    const addItemToCart = async () => {
+        const res = await fetch(`/all-product/productInfo/${ search.split('?id=')[1]}` , { method: "POST", headers: { "Content-type": "application/json" }, body: JSON.stringify({ _id: id})});
+        const data = await res.json();
+        console.log('Add item to Cart success',data);
+        window.location = '/cart'; //跳转至cart， cart data已经传到前端
     }
     useEffect(() => {
         initProductInfo();
@@ -33,11 +42,11 @@ function ProductDetail(props) {
                     <p className="detail"> Price: $ {info.price}</p>
                     <p className='detail'> Description: {info.description}</p>
                     <br></br>
-                    <Link href='/ClientLogined'>
-                    <Button variant="contained" color="secondary">
-                        Purchase
+                    
+                    <Button variant="contained" color="secondary" onClick={addItemToCart}>
+                        Save To Favorites Cart
                     </Button>
-                    </Link>
+                    
                     
                 </div>
             </div>
