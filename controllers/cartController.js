@@ -1,7 +1,6 @@
 const Product = require("../models/productModel")
 const Cart = require("../models/favouriteCart");
 const Client = require("../models/customerModel");
-const { findOne } = require("../models/productModel");
 
 
 const createCart = async (req, res) => {
@@ -59,8 +58,7 @@ const fetchCart = async(req, res) => {
 const addItemToCart = async(req, res) => {
     const productId = req.body._id;
     const customerId = req.session.passport.user._id;
-    console.log("product", productId);
-    console.log("customer", customerId);
+
     try{
         // let payload = {
         //     productId: req.body._id
@@ -75,17 +73,17 @@ const addItemToCart = async(req, res) => {
             })
         }
         const cart = await Cart.findOne({customer: customerId});
-        // Check if the item already existed in the cart
-        const item = Cart.findOne({customer: customerId, items:{$elemMatch: {productId: productId}}});
-        if (item){
-            console.log("Product ", productId, " Existed")
+        const items = cart.items;
+
+        const itemExists = items.some((item) => item._id.toString() == productId)
+        
+        if (itemExists){
             res.status(500).json({
                 type: "Product Existed",
                 msg: "Invalid Request"
             })
         }else{
             cart.items.push(productId);
-            console.log("33")
             await cart.save();
             res.status(200).json({
                 type: "success",
