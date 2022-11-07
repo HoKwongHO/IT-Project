@@ -26,6 +26,7 @@ function Register() {
     const res = await fetch("/register" ,{method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({nickname, email, password})});
     const data = await res.json();
     console.log(data);
+    window.location = '/customerlogin';
   };
 
 
