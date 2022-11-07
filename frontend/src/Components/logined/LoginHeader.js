@@ -7,14 +7,23 @@ import Headertab from '../HeaderTab/Index'
 import { useThemeContext } from '../../ThemeContext/ThemContext';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
-
+import {useCookies} from 'react-cookie';
 
 
 export default function Header() {
   const {toggle} = useThemeContext();
+  const [cookie, removeCookie] = useCookies(["login"]);
+  
   const logoutBtn = async () => {
-    const res = await fetch("/logout", { method: "POST", headers: { "Content-type": "application/json" } });
-    const data = await res.json();
+    if (cookie === undefined) {
+      return;
+    }
+
+    // Frontend
+    removeCookie("login");
+
+    // Backend
+    await fetch("/logout", { method: "POST", headers: { "Content-type": "application/json" } });
     window.location = '/customerlogin';
   }
   return (

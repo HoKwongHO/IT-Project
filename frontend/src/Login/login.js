@@ -3,6 +3,8 @@ import { Button, Checkbox, FormControlLabel, TextField } from '@material-ui/core
 import './login.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../Components/Header';
+import {useCookies} from 'react-cookie';
+import FlashMessage from 'react-flash-message';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,15 +23,24 @@ function Login() {
   // const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cookie, setCookie] = useCookies(["login"]);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+
   const loginbtn = async () => {
-    const res = await fetch("/login", { method: "POST", headers: { "Content-type": "application/json" },  body: JSON.stringify({ email: email, password: password }) });
-  
-    const data = await res.json();
-    console.log('login',data);
-    window.location = '/ClientLogined';
-    // if(data.msg === 'Welcome!') {
-    //   window.location = '/';
-    // }
+    try {
+      const res = await fetch("/login", { method: "POST", headers: { "Content-type": "application/json" },  body: JSON.stringify({ email: email, password: password }) });
+    
+      const data = await res.json();
+      console.log(data);
+
+      setCookie("login", "customer");
+      window.location = '/ClientLogined';
+    } catch (e) {
+      console.error("Login failed");
+      setErrorMessage(true);
+    }
+   
   };
   // const registerbtn = async() => {
   //   const res = await fetch("http://localhost:3030/register" ,{method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({nickname, email, password})});
@@ -55,6 +66,12 @@ function Login() {
       <Header></Header>
       <form className={classes.form} noValidate>
        <div className = 'loginWrapper'>
+
+      {errorMessage && 
+      (<FlashMessage duration={10000} >
+        <strong>Incorrect email or password! </strong>
+      </FlashMessage>)
+    }
         <h3>Enter your email address: </h3>
       <TextField
             variant="outlined"

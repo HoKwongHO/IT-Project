@@ -60,11 +60,9 @@ const addItemToCart = async(req, res) => {
     const customerId = req.session.passport.user._id;
 
     try{
-        // let payload = {
-        //     productId: req.body._id
-        // }
+       
         let productDetail = await Product.findOne({_id : productId}) 
-        console.log("11")
+    
         if (!productDetail){
             console.log("22")
             res.status(500).json({
