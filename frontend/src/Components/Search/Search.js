@@ -1,7 +1,10 @@
 import { React, useState } from "react";
 import TextField from "@mui/material/TextField";
-import List from "./searchList"
+import List from "./searchList";
 import "./Search.css";
+import Header from "../../Components/Header";
+// import CardList from './Components/CarList/CardList';
+
 
 function Search() {
 
@@ -15,6 +18,7 @@ function Search() {
   
     return (
       <div className="main">
+        <Header></Header>
         <h1>React Search</h1>
         <div className="search">
           <TextField
@@ -28,7 +32,6 @@ function Search() {
         <div className="CardList">
         <List input={inputText}/>
         </div>
-        {/* <List input={inputText} className ="CardList"/> */}
       </div>
     );
 }

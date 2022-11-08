@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from 'react'
-import "./Search.css";
 import Card from '../Card/Card';
+import "./SearchList.css";
 
 // const data = fetch("http://localhost:3030/all-product").then(res => res.json())
 // console.log(data)
