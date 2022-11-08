@@ -35,14 +35,12 @@ export default function Sample(props) {
       .then((jsonRes) => setProducts(jsonRes));
   }
 
-   //已经把cart的数据传进来了
+
   useEffect(() => {
       getCart();
   })
 
   const Data = Array.from(products);
-  console.log("data", Data);
-
 
   return (
     <div>

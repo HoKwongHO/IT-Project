@@ -28,7 +28,7 @@ const createCart = async (req, res) => {
 
 const fetchCart = async(req, res) => {
     try{
-        console.log(req.session.passport.user._id)
+        // console.log(req.session.passport.user._id)
         // find the cart by user_id
         const cart = await Cart.findOne({"customer": req.session.passport.user._id});
         // If there is no cart, then create a new one
@@ -39,9 +39,9 @@ const fetchCart = async(req, res) => {
             })
         }
     
-        // const data = [];
+
         const items = cart.items
-        //提取所有id到arr
+
         let ids = items.map((obj) => obj._id);
         await Product.find({ '_id': { $in: ids } })
             .then((items) => {
@@ -103,31 +103,31 @@ const addItemToCart = async(req, res) => {
     }
 }
 
-const removeItemFromCart = async(req, res) => {
-    const customerId = req.session.passport.user._id
-    const productId = req.body._id
-    try{
-        await Cart.findOneAndUpdate({customer: customerId}, {$pull: {items: {productId: productId}}});
-        console.log("removed successfully!")
-        const cart = await Cart.findOne({customer: customerId});
-        res.status(200).json({
-            type: "success",
-            msg: "Remove Item From Cart Successfully!",
-            data: cart
-        })
-    }catch(err){
-        console.log(err)
-        res.status(400).json({
-            type: "Invalid",
-            error: err,
-            msg: "Something went wrong"
-        })
-    }
-}
+// const removeItemFromCart = async(req, res) => {
+//     const customerId = req.session.passport.user._id
+//     const productId = req.body._id
+//     try{
+//         await Cart.findOneAndUpdate({customer: customerId}, {$pull: {items: {productId: productId}}});
+//         console.log("removed successfully!")
+//         const cart = await Cart.findOne({customer: customerId});
+//         res.status(200).json({
+//             type: "success",
+//             msg: "Remove Item From Cart Successfully!",
+//             data: cart
+//         })
+//     }catch(err){
+//         console.log(err)
+//         res.status(400).json({
+//             type: "Invalid",
+//             error: err,
+//             msg: "Something went wrong"
+//         })
+//     }
+// }
 
 module.exports = {
     createCart,
     fetchCart,
     addItemToCart,
-    removeItemFromCart
+    // removeItemFromCart
 }
