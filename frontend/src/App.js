@@ -5,7 +5,6 @@ import CardList from './Components/CarList/CardList';
 import Information from './Components/Information';
 import Footer from './Components/Footer';
 import { useThemeContext } from './ThemeContext/ThemContext';
-import Sitemap from './sitemap';
 
 
 function App() {
@@ -34,7 +33,7 @@ function App() {
         <h3 className="hotTitle">In-Store Hot Product.</h3>
         <CardList cardList={list} num={4}/>
         <Information info={info}/>
-        <Sitemap></Sitemap>
+        {/* <Sitemap></Sitemap> */}
       </div>
       <Footer/>
     </>

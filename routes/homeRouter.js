@@ -85,6 +85,7 @@ const upload = async (req, res) => {
 
   
   const uploadMulter = multer({
+<<<<<<< HEAD
     dest: 'temp',
     // fileFilter: (req, file, cb) => {
     //   const fieldname = file.fieldname;
@@ -96,6 +97,9 @@ const upload = async (req, res) => {
     //   }
     //   cb(null, true);
     // }
+=======
+    dest: 'temp/',
+>>>>>>> f921433372efb335c2201608c32a8bad4e15c804
   });
 
 module.exports = homeRouter;

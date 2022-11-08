@@ -52,9 +52,6 @@ homeRouter(app);
 
 
 
-//中间件 登陆，验证，跨域，权限
-
-
 // app.use("/", (req, res)=> {
 //     res.send("1");
 // })
