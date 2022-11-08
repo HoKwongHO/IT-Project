@@ -3,6 +3,9 @@ import { Button, Checkbox, FormControlLabel, TextField } from '@material-ui/core
 import './login.css'
 import { makeStyles } from '@material-ui/core/styles';
 import Header from '../Components/Header';
+import {useCookies} from 'react-cookie';
+import FlashMessage from 'react-flash-message';
+
 
 
 
@@ -21,12 +24,21 @@ function Login() {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [cookie, setCookie] = useCookies(["login"]);
+  const [errorMessage, setErrorMessage] = useState(false);
   //const [isLogin,setLogin] = useState(true);
   const loginbtn = async () => {
-    const res = await fetch("/stafflogin", { method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({ email, password }) });
-    const data = await res.json();
-    console.log(data);
-    window.location = '/demo';
+    try {
+      const res = await fetch("/stafflogin", { method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({ email, password }) });
+      const data = await res.json();
+      console.log(data);
+      setCookie("login", "staff");
+      window.location = '/demo';
+    }catch(e){
+      console.error("Login failed");
+      setErrorMessage(true);
+    }
+
   };
  
 
@@ -45,6 +57,10 @@ function Login() {
       <Header></Header>
       <form className={classes.form} noValidate>
        <div className = 'loginWrapper'>
+       {errorMessage && 
+      (<FlashMessage duration={10000} >
+        <strong>Incorrect email or password! </strong>
+      </FlashMessage>)}
       <h2>Log in as Staff</h2>
       <h3> Enter your email address: </h3>
       <TextField

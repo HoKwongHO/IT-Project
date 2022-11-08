@@ -14,7 +14,7 @@ export default function Header() {
   const [cookie, removeCookie] = useCookies(["login"]);
   
   const logoutBtn = async () => {
-    if (cookie === undefined) {
+    if (cookie.login === 'undefined') {
       return;
     }
 

@@ -11,6 +11,8 @@ import ProductDetail from './ProductDetail/ProductDetail';
 import Cart from './sample';
 import ClientLogined from './Components/logined/ClientLogined'
 import StaffLogined from './Components/logined/StaffClientLogined'
+import Protected from './protected'
+import ProtectedStaff from './ProtectedStaff'
 
 
 function App() {
@@ -22,13 +24,12 @@ function App() {
       <Route path="/customerregister" element={<Register />} />
       <Route path="/stafflogin" element={<StaffLogin />} />
       <Route path="/staffregister" element={<Register />} />
-      <Route path='/demo' element = {<Demo />} />
-      <Route path='/search' element = {<Search />} />
-      <Route path='/stafflogin' element = {<Stafflogin />} />
-      <Route path='/detail' element = {<ProductDetail />} />
-      <Route path='/cart' element = {<Cart />} />
-      <Route path='/ClientLogined' element = {<ClientLogined />} />
-      <Route path='/StaffLogined' element = {<StaffLogined />} />
+      <Route path='/demo' element = {<ProtectedStaff><Demo /></ProtectedStaff>} />
+      <Route path='/search' element = {<Protected><Search /></Protected>} />
+      <Route path='/detail' element = {<Protected><ProductDetail /></Protected>} />
+      <Route path='/cart' element = {<Protected><Cart /></Protected>} />
+      <Route path='/ClientLogined' element = {<Protected><ClientLogined /></Protected>} />
+      <Route path='/StaffLogined' element = {<ProtectedStaff><StaffLogined /></ProtectedStaff>} />
     </Routes>
   </BrowserRouter>
 }
