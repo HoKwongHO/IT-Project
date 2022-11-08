@@ -74,7 +74,7 @@ const upload = async (req, res) => {
     const file = files[0];
     let filePath = '';
     if (file.fieldname === 'upload') {
-      filePath = `${config.baseUrl}/preview/${file.filename}`;
+      filePath = `/preview/${file.filename}`;
     } else {
       res.status(401).json('402009');
     }
