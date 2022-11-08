@@ -38,12 +38,16 @@ const fetchCart = async(req, res) => {
                 msg: "Cart Not Found"
             })
         }
-        console.log("found")
-        console.log(cart)
-        res.status(200).json({
-            status: true,
-            data: cart
-        })
+    
+        // const data = [];
+        const items = cart.items
+        //提取所有id到arr
+        let ids = items.map((obj) => obj._id);
+        await Product.find({ '_id': { $in: ids } })
+            .then((items) => {
+                res.json(items)
+            })
+            .catch((err) => console.log(err))   
 
     }catch(err){
         console.log(err)

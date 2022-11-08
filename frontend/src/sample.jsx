@@ -10,7 +10,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
-import { useEffect,useState } from 'react'
+import { useEffect,useState } from 'react';
+import Card from './Components/Card/Card';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,95 +25,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Sample() {
+export default function Sample(props) {
   const classes = useStyles();
-  const [info,setInfo] = useState({})
+  const [products, setProducts] = useState({})
 
   const getCart = async () => {
-      fetch("/collection-cart/").then(res => {
-          setInfo(res.data)
-      })
-  } //已经把cart的数据传进来了
+      fetch("/collection-cart/")
+      .then((res) => res.json())
+      .then((jsonRes) => setProducts(jsonRes));
+  }
+
+   //已经把cart的数据传进来了
   useEffect(() => {
       getCart();
   })
+
+  const Data = Array.from(products);
+  console.log("data", Data);
+
 
   return (
     <div>
       <Header></Header>
       <div className='list'>
       <List className={classes.root}>
-      <h1>Shopping Cart</h1>
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Apple" src="https://st2.depositphotos.com/7036298/10694/i/450/depositphotos_106948346-stock-photo-ripe-red-apple-with-green.jpg" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Apple"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Qty: 1
-              </Typography>
-            </React.Fragment>
-          }
-          
-        />
-        <ListItemText primary="Total price: " secondary="$3.5" />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Banana" src="https://media.istockphoto.com/photos/bananas-isolated-picture-id1400057530?b=1&k=20&m=1400057530&s=170667a&w=0&h=hGf8i_ocaU1nJC2gqgr-Vdnbny-PMfMmTrG6czmBzMQ=" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Banana"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Qty: 2
-              </Typography>
-            </React.Fragment>
-          }
-          
-        />
-        <ListItemText primary="Total price: " secondary="$8" />
-      </ListItem>
-      <Divider variant="inset" component="li" />
-      <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt="Ice Cream" src="https://img.freepik.com/premium-vector/realistic-soft-american-ice-cream-waffle-cone_8071-5377.jpg?w=2000" />
-        </ListItemAvatar>
-        <ListItemText
-          primary="Ice Cream"
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                Qty: 1
-              </Typography>
-            </React.Fragment>
-          }
-          
-        />
-        <ListItemText primary="Total price: " secondary="$3" />
-      </ListItem>
-    </List>
+      <h1>Favourites Cart</h1>
+       <ul>{Data.map((item) => (
+                <Card info={item} key={item._id}/>
+                
+        ))}
+        </ul>
+      </List>
+      
       </div>
+      
 
     </div>
     
