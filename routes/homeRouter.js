@@ -85,7 +85,7 @@ const upload = async (req, res) => {
 
   
   const uploadMulter = multer({
-    dest: 'temp/',
+    dest: 'temp',
     // fileFilter: (req, file, cb) => {
     //   const fieldname = file.fieldname;
     //   console.log("filles",fieldname)
