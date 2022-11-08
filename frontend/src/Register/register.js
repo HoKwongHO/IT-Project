@@ -19,14 +19,21 @@ const useStyles = makeStyles((theme) => ({
 function Register() {
   const classes = useStyles();
   const [nickname, setNickname] = useState("");
+  const [msg,setMsg] = useState('');
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 //islogin
   const registerbtn = async() => {
     const res = await fetch("/register" ,{method: "post", headers: { "Content-type": "application/json" }, body: JSON.stringify({nickname, email, password})});
     const data = await res.json();
-    console.log(data);
-    window.location = '/customerlogin';
+    console.log('register',data);
+    if(data.msg) {
+      setMsg(data.msg)
+    }
+    else if(data.data && data.data.msg) {
+      setMsg(data.data.msg)
+    } 
+   // window.location = '/customerlogin';
   };
 
 
@@ -45,6 +52,7 @@ function Register() {
   return (
     
     <div className='wrapper1'>
+      
       <Header></Header>
       <form className={classes.form} noValidate>
       <div className = 'loginWrapper'>
@@ -87,6 +95,9 @@ function Register() {
             onChange={handlePassword}
           />
         <p className='required'>* is required</p>
+        {msg && 
+          (<p style={{color: 'red'}}>{msg}</p>)
+        }
         <br></br>
         <p className='hint'> Your email format should be: xxxx@xxx.xx</p>
         <br></br>

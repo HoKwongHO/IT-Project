@@ -5,7 +5,6 @@ import CardList from '../CarList/CardList';
 import Information from '../Information';
 import Footer from '../Footer';
 import { useThemeContext } from '../../ThemeContext/ThemContext';
-import Sitemap from '../../sitemap';
 
 
 function App() {
@@ -23,8 +22,8 @@ function App() {
   // }
 //setinfo
   const [info] = useState({
-    title: "Detail Title",
-    detail: "Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information. Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information. Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information. Although cards can support multiple actions, UI controls, and an overflow menu, use restraint and remember that cards are entry points to more complex and detailed information."
+    title: "Announcement",
+    detail: "Our website will be closed between 1 p.m. to 3p.m on 10/18/2022, due to the maintainise action, sorry for the inconvinence"
   })
   return (
     <>
@@ -34,7 +33,7 @@ function App() {
         <h3 className="hotTitle">In-Store Hot Product.</h3>
         <CardList cardList={list} num={4}/>
         <Information info={info}/>
-        <Sitemap></Sitemap>
+        {/* <Sitemap></Sitemap> */}
       </div>
       <Footer/>
     </>

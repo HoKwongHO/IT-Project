@@ -5,6 +5,7 @@
     align-items: center;
     flex-direction: column;
     row-gap: 20px;
+    padding: 90px 75px 35px;
 }
 
 h1 {
@@ -16,25 +17,39 @@ h1 {
 .search {
     width: 30%;
 }
-
+.cardWrapper {
+    margin-left: 20px;
+}
 ul li {
     font-size: 20px;
+    margin-left: 20px;
+    margin-bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 20px 0;
 } 
 
-.CardList {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 0;
-    vertical-align:auto;
-}
-
 @media (max-width: 748px) {
     .cardList {
         flex-direction: column;
     }
 }
+
+
+.hotTitle {
+    text-align: center;
+    font-weight: bold;
+    font-size: 70px;
+    color: rgb(85, 82, 82);
+  }
+
+  .CardList {
+    width: 100vw;
+  }
+
+  .CardList ul {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+  }

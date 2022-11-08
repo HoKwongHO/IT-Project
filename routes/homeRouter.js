@@ -86,16 +86,6 @@ const upload = async (req, res) => {
   
   const uploadMulter = multer({
     dest: 'temp/',
-    // fileFilter: (req, file, cb) => {
-    //   const fieldname = file.fieldname;
-    //   console.log("filles",fieldname)
-    //   if (fieldname === 'avatar') {
-    //     if (!['image/png', 'image/jpg', 'image/jpeg'].includes(file.originalname.mimeType)) {
-    //       cb({ message: '只允png/jpg/jpeg三种格式图片上传', code: '402010' });
-    //     }
-    //   }
-    //   cb(null, true);
-    // }
   });
 
 module.exports = homeRouter;
