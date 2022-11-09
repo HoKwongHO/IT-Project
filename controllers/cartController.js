@@ -103,31 +103,34 @@ const addItemToCart = async(req, res) => {
     }
 }
 
-// const removeItemFromCart = async(req, res) => {
-//     const customerId = req.session.passport.user._id
-//     const productId = req.body._id
-//     try{
-//         await Cart.findOneAndUpdate({customer: customerId}, {$pull: {items: {productId: productId}}});
-//         console.log("removed successfully!")
-//         const cart = await Cart.findOne({customer: customerId});
-//         res.status(200).json({
-//             type: "success",
-//             msg: "Remove Item From Cart Successfully!",
-//             data: cart
-//         })
-//     }catch(err){
-//         console.log(err)
-//         res.status(400).json({
-//             type: "Invalid",
-//             error: err,
-//             msg: "Something went wrong"
-//         })
-//     }
-// }
+const removeItemFromCart = async(req, res) => {
+    const customerId = req.session.passport.user._id;
+    const productId = req.body.productId;
+    try{
+        const cart = await Cart.findOne({customer: customerId});
+     
+       
+        cart.items = cart.items.filter(item => item._id.toString() != productId);
+    
+        cart.save();
+        res.status(200).json({
+            type: "success",
+            msg: "Remove Item From Cart Successfully!",
+            data: cart
+        })
+    }catch(err){
+        console.log(err)
+        res.status(400).json({
+            type: "Invalid",
+            error: err,
+            msg: "Something went wrong"
+        })
+    }
+}
 
 module.exports = {
     createCart,
     fetchCart,
     addItemToCart,
-    // removeItemFromCart
+    removeItemFromCart
 }

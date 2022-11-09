@@ -11,7 +11,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import { useEffect,useState } from 'react';
-import Card from './Components/Card/Card';
+import CartCard from './Components/Card/CartCard';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,7 +49,7 @@ export default function Sample(props) {
       <List className={classes.root}>
       <h1>Favourites Cart</h1>
        <ul>{Data.map((item) => (
-                <Card info={item} key={item._id}/>
+                <CartCard info={item} key={item._id}/>
                 
         ))}
         </ul>
