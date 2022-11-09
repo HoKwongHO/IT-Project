@@ -29,9 +29,10 @@ Client: qionghaofeng@student.unimelb.edu.au
 
 In order to launch our project on your local server, you should:
 1. Clone this repository `https://github.com/HoKwongHO/IT-Project.git`.
-2. Install dependencies with `npm install`. (Check used dependencies on [package.json](https://github.com/HoKwongHO/IT-Project/blob/main/package.json))
-3. Run the front end with `npm start`.
-4. Run the back end with `node app.js`.
+2. Install dependencies with `npm install` in both "IT-Project" folder and "frontend" folder. (Check used dependencies on [package.json](https://github.com/HoKwongHO/IT-Project/blob/main/package.json))
+3. Open a terminal window and run the back end with `node app.js` in "IT-Project" folder.
+4. Open another terminal window and run the front end with `npm start` after `cd` into "frontend" folder.
+
 
 <br>
 
